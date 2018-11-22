@@ -7,7 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Practice4Control {
     public static void main(String[] args) {
         ApplicationContext context=new ClassPathXmlApplicationContext("classpath:spring.xml");
-        Practice4Service practice4Service=(Practice4Service)context.getBean("Practice4ServiceImpl");
+        Practice4Service practice4Service=(Practice4Service)context.getBean("practice4ServiceImpl");
         practice4Service.say();
     }
 }
