@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="springPractice" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="springMaven" target="1.5" />
+      <module name="springPractice" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

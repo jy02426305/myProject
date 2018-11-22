@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+    <!--practice1-->
+    <bean id="practice1ServiceImpl" class="com.cyx.spring.service.impl.Practice1ServiceImpl" scope="singleton"></bean>
+
+    <!--practice2-->
+    <bean id="dogServiceImpl" class="com.cyx.spring.service.impl.DogServiceImpl" scope="singleton">
+        <property name="sound" value="汪汪汪"></property>
+    </bean>
+    <bean id="catServiceImpl" class="com.cyx.spring.service.impl.CatServiceImpl" scope="singleton">
+        <property name="sound" value="喵喵喵"></property>
+    </bean>
+    <bean id="animalControl" class="com.cyx.spring.control.AnimalControl" scope="singleton">
+        <property name="animalService" ref="dogServiceImpl"></property>
+    </bean>
+
+    <!--practice3-->
+    <bean id="practice3ServiceImpl" class="com.cyx.spring.service.impl.Practice3ServiceImpl" init-method="start" destroy-method="end"></bean>
+
+    <!--practice4-->
+    <bean id="practice4ServiceImpl" class="com.cyx.spring.service.impl.Practice4ServiceImpl">
+        <constructor-arg name="name" value="张三" index="0" type="java.lang.String"></constructor-arg>
+    </bean>
+</beans>
