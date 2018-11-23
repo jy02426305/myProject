@@ -15,18 +15,18 @@ public class ThreadLocalPractice {
     }
 
     public static void main(String[] args) throws Exception {
+//        final ThreadLocalPractice tl=new ThreadLocalPractice();
         ThreadLocalPractice tl=new ThreadLocalPractice();
-
 //        tl.setQq("14038796");
         System.out.println("主线程："+tl.getQq());
 
-        Thread one=new Thread(){
+        Thread one=new Thread(new Runnable() {
             @Override
             public void run() {
                 tl.setQq("88042711");
                 System.out.println("子线程："+tl.getQq());
             }
-        };
+        });
         one.start();
         one.join();//使父线程(main)等待子线程执行结束再继续执行
 
