@@ -7,6 +7,7 @@ public class Practice4ServiceImpl implements Practice4Service {
     public Practice4ServiceImpl(String name){
         this.name=name;
     }
+    @Override
     public void say() {
         System.out.println("我是："+this.name);
     }
