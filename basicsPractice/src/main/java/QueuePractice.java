@@ -1,5 +1,6 @@
 
 import java.util.ArrayDeque;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class QueuePractice {
@@ -8,7 +9,7 @@ public class QueuePractice {
         /*
         queue 先进先出
          */
-        Queue<String> queue=new ArrayDeque<String>();
+        Queue<String> queue=new PriorityQueue<>();
         queue.add("张三");
         queue.add("李四");
         queue.add("王五");

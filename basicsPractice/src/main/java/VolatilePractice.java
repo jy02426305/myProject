@@ -1,64 +1,33 @@
-import javafx.animation.Animation;
-
+/**
+ * 未能验证volatile有序性
+ */
 public class VolatilePractice {
     public static Person person;
-    public static Boolean next=false;
-    public static int a=10;
-    public volatile static int b=11;
-    public static int c=12;
-    public static int d=13;
-    public static int e=14;
+    public volatile static Boolean next=false;
     public static void main(String[] args) {
         Thread thread1=new Thread(new Runnable() {
             @Override
             public void run() {
-                person=new Person();
-                for (int i = 0; i < 1000; i++) {
-                    if(i==999){
+                person = new Person();
+                for (int i = 0; i < 10000; i++) {
+                    if (i == 9999) {
                         person.setName("张三");
                     }
                 }
-                next=true;
-                for (int i = 0; i < 1000; i++) {
-                    if(i==999){
-                        a=2;
-                    }
-                }
-                for (int i = 0; i < 1000; i++) {
-                    if(i==999){
-                        b=3;
-                    }
-                }
-                for (int i = 0; i < 1000; i++) {
-                    if(i==999){
-                        c=4;
-                    }
-                }
-                for (int i = 0; i < 1000; i++) {
-                    if(i==999){
-                        d=5;
-                    }
-                }
-                for (int i = 0; i < 1000; i++) {
-                    if(i==999){
-                        e=6;
-                    }
-                }
+                next = true;
             }
         });
 
         Thread thread2=new Thread(new Runnable() {
             @Override
             public void run() {
+                int j=0;
                 while(!next){
-                    System.out.println("如果线程1不给next赋值完，就不停下来。");
+                    j++;
+//                    System.out.println("如果线程1不给next赋值完，就不停下来。");
                 }
-                System.out.println(a);
-                System.out.println(b);
-                System.out.println(c);
-                System.out.println(d);
-                System.out.println(e);
-                System.out.println("我的名字叫"+person.getName()+"，总能在线程1为next赋值之后输出");
+                System.out.println(j);
+                System.out.println("我的名字叫"+(person==null?"无名": person.getName())+"，总能在线程1为next赋值之后输出");
             }
         });
 
