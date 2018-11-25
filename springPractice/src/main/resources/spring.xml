@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+    <context:component-scan base-package="com.cyx.spring"></context:component-scan>
+
     <!--practice1-->
     <bean id="practice1ServiceImpl" class="com.cyx.spring.service.impl.Practice1ServiceImpl" scope="singleton"></bean>
 
@@ -23,5 +29,41 @@
     <!--practice4-->
     <bean id="practice4ServiceImpl" class="com.cyx.spring.service.impl.Practice4ServiceImpl">
         <constructor-arg name="name" value="张三" index="0" type="java.lang.String"></constructor-arg>
+    </bean>
+
+    <!-- practice5 -->
+    <bean id="practice5ServiceImpl" class="com.cyx.spring.service.impl.Practice5ServiceImpl">
+        <!-- 如果数组中只准备一个值（对象），直接使用value|ref即可 -->
+        <!-- 对象中数组名为arr -->
+        <!-- <property name="arr" value="Tom"></property> -->
+        <property name="intAry">
+            <array>
+                <value>1</value>
+                <value>2</value>
+                <value>3</value>
+            </array>
+        </property>
+        <property name="list">
+            <!-- 如果list中只准备一个值（对象），直接使用value|ref即可 -->
+            <!-- <property name="list" value="Tom"></property> -->
+            <list>
+                <value>张三</value>
+                <value>李四</value>
+                <ref bean="dogServiceImpl" />
+            </list>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="张三" value="aaa"></entry>
+                <entry key="李四" value="bbb"></entry>
+                <entry key="王五" value-ref="dogServiceImpl"></entry>
+            </map>
+        </property>
+        <property name="prop">
+            <props>
+                <prop key="张三">aaa</prop>
+                <prop key="李四">bbb</prop>
+            </props>
+        </property>
     </bean>
 </beans>

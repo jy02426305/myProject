@@ -1,5 +1,9 @@
+import java.util.Collections;
 import java.util.Stack;
 
+/*
+栈
+ */
 public class StackPractice {
     public static void main(String[] args) {
         /*

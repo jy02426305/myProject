@@ -12,6 +12,7 @@ public class DogServiceImpl implements AnimalService {
     public void setSound(String sound) {
         this.sound = sound;
     }
+
     @Override
     public void call() {
         System.out.println(this.sound);

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -16,5 +17,16 @@ public class ArrayListPractice {
         for (Integer integer : integerAry) {
             System.out.println(integer);
         }
+        /*
+        下面代码执行会报ConcurrentModificationException，详情原因看https://www.cnblogs.com/dolphin0520/p/3933551.html
+         */
+//        ArrayList<Integer> list = new ArrayList<Integer>();
+//        list.add(2);
+//        Iterator<Integer> iterator = list.iterator();
+//        while(iterator.hasNext()){
+//            Integer integer = iterator.next();
+//            if(integer==2)
+//                list.remove(integer);
+//        }
     }
 }
