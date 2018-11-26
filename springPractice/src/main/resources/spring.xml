@@ -122,4 +122,21 @@
     <!-- practice12 -->
     <!-- 配置bean的后置处理器，需事先BeanPostProcessor接口，配置文件中不用设置id,IOC容器自动识别是一个BeanPostProcessor -->
     <bean class="com.cyx.spring.service.impl.Practice12ServiceImpl"></bean>
+
+    <!-- practice13 -->
+    <bean id="practice13ServiceImpl" class="com.cyx.spring.service.impl.Practice13ServiceImpl" factory-method="getDogServiceImpl">
+        <constructor-arg value="dog"></constructor-arg>
+        <property name="sound" value="旺旺旺"></property>
+    </bean>
+
+    <!-- practice14 -->
+    <bean id="instanceFactory" class="com.cyx.spring.service.impl.Practice14ServiceImpl"></bean>
+    <bean id="dogIns" factory-bean="instanceFactory" factory-method="getDog">
+        <constructor-arg name="name" value="dog"></constructor-arg>
+        <property name="sound" value="旺旺旺" />
+    </bean>
+    <bean id="catIns" factory-bean="instanceFactory" factory-method="getCat">
+        <constructor-arg name="name" value="cat"></constructor-arg>
+        <property name="sound" value="喵喵喵" />
+    </bean>
 </beans>
