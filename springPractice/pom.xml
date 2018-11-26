@@ -10,6 +10,7 @@
 
     <properties>
         <springVersion>5.1.2.RELEASE</springVersion>
+        <mysqlVersion> 8.0.13</mysqlVersion>
     </properties>
 
     <!-- 指定maven编译的jdk版本,如果不指定,maven3默认用jdk 1.5 maven2默认用jdk1.3，jdk1.5及以下，用@Override 会报编译错误-->
@@ -31,6 +32,7 @@
     </build>
 
     <dependencies>
+        <!-- 基础包 begin -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
@@ -56,5 +58,20 @@
             <artifactId>commons-logging</artifactId>
             <version>1.2</version>
         </dependency>
+        <!-- end -->
+
+        <!-- 数据库连接 begin -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysqlVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.5.2</version>
+        </dependency>
+        <!-- end -->
     </dependencies>
 </project>

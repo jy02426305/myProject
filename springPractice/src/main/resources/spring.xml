@@ -2,17 +2,34 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 
     <context:component-scan base-package="com.cyx.spring"></context:component-scan>
+    <context:property-placeholder location="classpath:db.properties" />
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driverClassName}" />
+        <property name="jdbcUrl" value="${jdbc.url}" />
+        <property name="user" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+    </bean>
 
     <!--practice1-->
     <bean id="practice1ServiceImpl" class="com.cyx.spring.service.impl.Practice1ServiceImpl" scope="singleton"></bean>
 
     <!--practice2-->
+    <!-- scope:
+            1.request:web环境下.对象与request生命周期一致.
+            2.session:web环境下,对象与session生命周期一致.
+            3.singleton(默认值):单例对象.被标识为单例的对象在spring容器中只会存在一个实例；
+            4.prototype:多例原型.被标识为多例的对象,每次再获得才会创建.每次创建都是新的对象.整合struts2时,ActionBean必须配置为多例的.
+     -->
     <bean id="dogServiceImpl" class="com.cyx.spring.service.impl.DogServiceImpl" scope="singleton">
         <property name="sound" value="汪汪汪"></property>
     </bean>
@@ -28,7 +45,10 @@
 
     <!--practice4-->
     <bean id="practice4ServiceImpl" class="com.cyx.spring.service.impl.Practice4ServiceImpl">
-        <constructor-arg name="name" value="张三" index="0" type="java.lang.String"></constructor-arg>
+        <constructor-arg name="name" index="0" type="java.lang.String">
+            <value><![CDATA[>!张三^>]]></value>
+        </constructor-arg>
+        <constructor-arg index="1" type="int" value="9527"></constructor-arg>
     </bean>
 
     <!-- practice5 -->
@@ -65,5 +85,27 @@
                 <prop key="李四">bbb</prop>
             </props>
         </property>
+        <property name="dog" ref="dogServiceImpl"></property>
+        <property name="dog.sound" value="汪汪汪嗝"></property>
+    </bean>
+
+    <!-- practice7 -->
+    <util:list id="toyPublic">
+        <value>小车</value>
+        <value>积木</value>
+    </util:list>
+    <bean id="practice7ServiceImpl" class="com.cyx.spring.service.impl.Practice7ServiceImpl">
+        <property name="toy" ref="toyPublic"></property>
+    </bean>
+
+    <!-- practice8 -->
+    <bean id="dogFood" class="com.cyx.spring.service.impl.DogFood">
+        <!--<property name="taste">
+            <value>甜的</value>
+        </property>-->
+    </bean>
+    <bean id="dog2" class="com.cyx.spring.service.impl.DogServiceImpl" parent="dogServiceImpl" depends-on="dogFood">
+        <property name="dogFood" ref="dogFood"></property>
+        <property name="dogFood.taste" value="甜的"></property>
     </bean>
 </beans>

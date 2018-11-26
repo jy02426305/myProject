@@ -9,13 +9,14 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class Practice6Control {
+    @Autowired(required = false)
+    private Practice6Service practice6Service;
 
     public static void main(String[] args) {
 //        Practice6Control practice6Control=new Practice6Control();
 //        practice6Control.practice6Service.say();
         ApplicationContext context=new ClassPathXmlApplicationContext("classpath:spring.xml");
-
-        Practice6Service practice6Service=(Practice6ServiceImpl)context.getBean("Practice6ServiceImpl");
+        Practice6Service practice6Service=(Practice6ServiceImpl)context.getBean("practice6Service");
         practice6Service.say();
     }
 }

@@ -26,5 +26,6 @@ public class Practice5Control {
         System.out.println(((DogServiceImpl)map.get("王五")).getSound());
         System.out.println(properties.get("张三"));
         System.out.println(intAry[0]);
+        System.out.println(practice5ServiceImpl.getDog().getSound());
     }
 }

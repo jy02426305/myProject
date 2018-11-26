@@ -11,6 +11,15 @@ public class Practice5ServiceImpl implements Practice5Service{
     private List list;
     private Map map;
     private Properties prop;
+    private DogServiceImpl dog;
+
+    public DogServiceImpl getDog() {
+        return dog;
+    }
+
+    public void setDog(DogServiceImpl dog) {
+        this.dog = dog;
+    }
 
     public Properties getProp() {
         return prop;

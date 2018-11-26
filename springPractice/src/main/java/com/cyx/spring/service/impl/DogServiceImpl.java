@@ -3,7 +3,20 @@ package com.cyx.spring.service.impl;
 import com.cyx.spring.service.AnimalService;
 
 public class DogServiceImpl implements AnimalService {
+    public DogServiceImpl(){
+        System.out.println("dogServiceImpl初始化完成");
+    }
+
     private String sound;
+    private DogFood dogFood;
+
+    public DogFood getDogFood() {
+        return dogFood;
+    }
+
+    public void setDogFood(DogFood dogFood) {
+        this.dogFood = dogFood;
+    }
 
     public String getSound() {
         return sound;
