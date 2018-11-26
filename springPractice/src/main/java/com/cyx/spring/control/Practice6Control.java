@@ -7,6 +7,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 
+/*
+注解
+ */
 @Controller
 public class Practice6Control {
     @Autowired(required = false)

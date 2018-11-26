@@ -99,13 +99,27 @@
     </bean>
 
     <!-- practice8 -->
-    <bean id="dogFood" class="com.cyx.spring.service.impl.DogFood">
-        <!--<property name="taste">
-            <value>甜的</value>
-        </property>-->
-    </bean>
+    <bean id="dogFood" class="com.cyx.spring.service.impl.DogFood"></bean>
     <bean id="dog2" class="com.cyx.spring.service.impl.DogServiceImpl" parent="dogServiceImpl" depends-on="dogFood">
         <property name="dogFood" ref="dogFood"></property>
         <property name="dogFood.taste" value="甜的"></property>
     </bean>
+
+    <!-- practice10 -->
+    <!--1.lazy-init=”false” 立即加载， 在spring启动时，立刻进行实例.
+    2.lazy-init=”true” 延迟加载 ,设置为true的bean将不会在ApplicationContext启动时提前被实例化，而是在第一次向容器通过getBean索取bean时实例化的。
+    3.如果一个设置了立即加载的bean1,引用了一个延迟加载的bean2,那么bean1在容器启动时被实例化，而bean2由于被bean1引用，所以也被实例化，这种情况也符合延迟加载的bean在第一次调用时才被实例化的规则。-->
+    <bean id="practice10ServiceImpl" class="com.cyx.spring.service.impl.Practice10ServiceImpl" scope="singleton" lazy-init="true"></bean>
+
+    <!-- practice11 -->
+    <bean id="practice11ServiceImpl" class="com.cyx.spring.service.impl.Practice11ServiceImpl">
+        <property name="fullname" value="张三" />
+    </bean>
+    <bean id="practice11ServiceImpl_2" class="com.cyx.spring.service.impl.Practice11ServiceImpl">
+        <property name="fullname" value="#{practice11ServiceImpl.fullname}" />
+    </bean>
+
+    <!-- practice12 -->
+    <!-- 配置bean的后置处理器，需事先BeanPostProcessor接口，配置文件中不用设置id,IOC容器自动识别是一个BeanPostProcessor -->
+    <bean class="com.cyx.spring.service.impl.Practice12ServiceImpl"></bean>
 </beans>
