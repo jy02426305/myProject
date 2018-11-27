@@ -90,6 +90,7 @@
     </bean>
 
     <!-- practice7 -->
+    <!-- spring util工具类 -->
     <util:list id="toyPublic">
         <value>小车</value>
         <value>积木</value>
@@ -138,5 +139,10 @@
     <bean id="catIns" factory-bean="instanceFactory" factory-method="getCat">
         <constructor-arg name="name" value="cat"></constructor-arg>
         <property name="sound" value="喵喵喵" />
+    </bean>
+
+    <!-- practice15 -->
+    <bean id="practice15ServiceImpl" class="com.cyx.spring.service.impl.Practice15ServiceImpl">
+        <property name="state" value="甜的" />
     </bean>
 </beans>

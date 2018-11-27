@@ -5,6 +5,7 @@
       <list>
         <option value="$PROJECT_DIR$/springPractice/pom.xml" />
         <option value="$PROJECT_DIR$/basicsPractice/pom.xml" />
+        <option value="$PROJECT_DIR$/annotationPratice/pom.xml" />
       </list>
     </option>
   </component>

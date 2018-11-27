@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 只扫描resource-pattern指定的组件 -->
+    <!--<context:component-scan base-package="com.cyx.spring" resource-pattern="dao/impl/*.class">
+    </context:component-scan>-->
+
+    <!-- 只扫描@Controller的注解 -->
+    <!--<context:component-scan base-package="com.cyx.spring" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>-->
+
+    <!-- 不扫描@Controller的注解 -->
+    <!--<context:component-scan base-package="com.cyx.spring">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>-->
+
+    <!-- 只扫描expression指定的类 -->
+    <!--<context:component-scan base-package="com.cyx.spring" use-default-filters="false">
+        <context:include-filter type="assignable" expression="com.cyx.spring.control.UserControl" />
+    </context:component-scan>-->
+
+    <context:component-scan base-package="com.cyx.spring">
+    </context:component-scan>
+</beans>

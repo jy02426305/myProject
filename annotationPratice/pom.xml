@@ -5,14 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.cyx</groupId>
-    <artifactId>springPractice</artifactId>
+    <artifactId>annotationPratice</artifactId>
     <version>1.0-SNAPSHOT</version>
-
     <properties>
         <springVersion>5.1.2.RELEASE</springVersion>
-        <mysqlVersion>8.0.13</mysqlVersion>
     </properties>
-
     <!-- 指定maven编译的jdk版本,如果不指定,maven3默认用jdk 1.5 maven2默认用jdk1.3，jdk1.5及以下，用@Override 会报编译错误-->
     <build>
         <finalName>spirng</finalName>
@@ -30,7 +27,7 @@
             </plugin>
         </plugins>
     </build>
-
+    <!-- end -->
     <dependencies>
         <!-- 基础包 begin -->
         <dependency>
@@ -60,17 +57,12 @@
         </dependency>
         <!-- end -->
 
-        <!-- 数据库连接 begin -->
+        <!-- JUnit单元测试 -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysqlVersion}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.mchange</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>0.9.5.2</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.3.1</version>
+            <scope>test</scope>
         </dependency>
         <!-- end -->
     </dependencies>

@@ -5,6 +5,10 @@ public class DogFood {
         System.out.println("dogFood初始化完成");
     }
 
+    public DogFood(String taste){
+        this.taste=taste;
+    }
+
     private String taste;
 
     public String getTaste() {
