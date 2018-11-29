@@ -21,7 +21,7 @@
     </bean>
 
     <!--practice1-->
-    <bean id="practice1ServiceImpl" class="com.cyx.spring.service.impl.Practice1ServiceImpl" scope="singleton"></bean>
+    <bean id="practice1ServiceImpl" class="com.cyx.spring.zhujie.service.impl.Practice1ServiceImpl" scope="singleton"></bean>
 
     <!--practice2-->
     <!-- scope:
@@ -30,21 +30,21 @@
             3.singleton(默认值):单例对象.被标识为单例的对象在spring容器中只会存在一个实例；
             4.prototype:多例原型.被标识为多例的对象,每次再获得才会创建.每次创建都是新的对象.整合struts2时,ActionBean必须配置为多例的.
      -->
-    <bean id="dogServiceImpl" class="com.cyx.spring.service.impl.DogServiceImpl" scope="singleton">
+    <bean id="dogServiceImpl" class="com.cyx.spring.zhujie.service.impl.DogServiceImpl" scope="singleton">
         <property name="sound" value="汪汪汪"></property>
     </bean>
-    <bean id="catServiceImpl" class="com.cyx.spring.service.impl.CatServiceImpl" scope="singleton">
+    <bean id="catServiceImpl" class="com.cyx.spring.zhujie.service.impl.CatServiceImpl" scope="singleton">
         <property name="sound" value="喵喵喵"></property>
     </bean>
-    <bean id="animalControl" class="com.cyx.spring.control.AnimalControl" scope="singleton">
+    <bean id="animalControl" class="com.cyx.spring.zhujie.control.AnimalControl" scope="singleton">
         <property name="animalService" ref="dogServiceImpl"></property>
     </bean>
 
     <!--practice3-->
-    <bean id="practice3ServiceImpl" class="com.cyx.spring.service.impl.Practice3ServiceImpl" init-method="start" destroy-method="end"></bean>
+    <bean id="practice3ServiceImpl" class="com.cyx.spring.zhujie.service.impl.Practice3ServiceImpl" init-method="start" destroy-method="end"></bean>
 
     <!--practice4-->
-    <bean id="practice4ServiceImpl" class="com.cyx.spring.service.impl.Practice4ServiceImpl">
+    <bean id="practice4ServiceImpl" class="com.cyx.spring.zhujie.service.impl.Practice4ServiceImpl">
         <constructor-arg name="name" index="0" type="java.lang.String">
             <value><![CDATA[>!张三^>]]></value>
         </constructor-arg>
@@ -52,7 +52,7 @@
     </bean>
 
     <!-- practice5 -->
-    <bean id="practice5ServiceImpl" class="com.cyx.spring.service.impl.Practice5ServiceImpl">
+    <bean id="practice5ServiceImpl" class="com.cyx.spring.zhujie.service.impl.Practice5ServiceImpl">
         <!-- 如果数组中只准备一个值（对象），直接使用value|ref即可 -->
         <!-- 对象中数组名为arr -->
         <!-- <property name="arr" value="Tom"></property> -->
@@ -95,13 +95,13 @@
         <value>小车</value>
         <value>积木</value>
     </util:list>
-    <bean id="practice7ServiceImpl" class="com.cyx.spring.service.impl.Practice7ServiceImpl">
+    <bean id="practice7ServiceImpl" class="com.cyx.spring.zhujie.service.impl.Practice7ServiceImpl">
         <property name="toy" ref="toyPublic"></property>
     </bean>
 
     <!-- practice8 -->
-    <bean id="dogFood" class="com.cyx.spring.service.impl.DogFood"></bean>
-    <bean id="dog2" class="com.cyx.spring.service.impl.DogServiceImpl" parent="dogServiceImpl" depends-on="dogFood">
+    <bean id="dogFood" class="com.cyx.spring.zhujie.service.impl.DogFood"></bean>
+    <bean id="dog2" class="com.cyx.spring.zhujie.service.impl.DogServiceImpl" parent="dogServiceImpl" depends-on="dogFood">
         <property name="dogFood" ref="dogFood"></property>
         <property name="dogFood.taste" value="甜的"></property>
     </bean>
@@ -110,28 +110,28 @@
     <!--1.lazy-init=”false” 立即加载， 在spring启动时，立刻进行实例.
     2.lazy-init=”true” 延迟加载 ,设置为true的bean将不会在ApplicationContext启动时提前被实例化，而是在第一次向容器通过getBean索取bean时实例化的。
     3.如果一个设置了立即加载的bean1,引用了一个延迟加载的bean2,那么bean1在容器启动时被实例化，而bean2由于被bean1引用，所以也被实例化，这种情况也符合延迟加载的bean在第一次调用时才被实例化的规则。-->
-    <bean id="practice10ServiceImpl" class="com.cyx.spring.service.impl.Practice10ServiceImpl" scope="singleton" lazy-init="true"></bean>
+    <bean id="practice10ServiceImpl" class="com.cyx.spring.zhujie.service.impl.Practice10ServiceImpl" scope="singleton" lazy-init="true"></bean>
 
     <!-- practice11 -->
-    <bean id="practice11ServiceImpl" class="com.cyx.spring.service.impl.Practice11ServiceImpl">
+    <bean id="practice11ServiceImpl" class="com.cyx.spring.zhujie.service.impl.Practice11ServiceImpl">
         <property name="fullname" value="张三" />
     </bean>
-    <bean id="practice11ServiceImpl_2" class="com.cyx.spring.service.impl.Practice11ServiceImpl">
+    <bean id="practice11ServiceImpl_2" class="com.cyx.spring.zhujie.service.impl.Practice11ServiceImpl">
         <property name="fullname" value="#{practice11ServiceImpl.fullname}" />
     </bean>
 
     <!-- practice12 -->
     <!-- 配置bean的后置处理器，需事先BeanPostProcessor接口，配置文件中不用设置id,IOC容器自动识别是一个BeanPostProcessor -->
-    <bean class="com.cyx.spring.service.impl.Practice12ServiceImpl"></bean>
+    <bean class="com.cyx.spring.zhujie.service.impl.Practice12ServiceImpl"></bean>
 
     <!-- practice13 -->
-    <bean id="practice13ServiceImpl" class="com.cyx.spring.service.impl.Practice13ServiceImpl" factory-method="getDogServiceImpl">
+    <bean id="practice13ServiceImpl" class="com.cyx.spring.zhujie.service.impl.Practice13ServiceImpl" factory-method="getDogServiceImpl">
         <constructor-arg value="dog"></constructor-arg>
         <property name="sound" value="旺旺旺"></property>
     </bean>
 
     <!-- practice14 -->
-    <bean id="instanceFactory" class="com.cyx.spring.service.impl.Practice14ServiceImpl"></bean>
+    <bean id="instanceFactory" class="com.cyx.spring.zhujie.service.impl.Practice14ServiceImpl"></bean>
     <bean id="dogIns" factory-bean="instanceFactory" factory-method="getDog">
         <constructor-arg name="name" value="dog"></constructor-arg>
         <property name="sound" value="旺旺旺" />
@@ -142,7 +142,7 @@
     </bean>
 
     <!-- practice15 -->
-    <bean id="practice15ServiceImpl" class="com.cyx.spring.service.impl.Practice15ServiceImpl">
+    <bean id="practice15ServiceImpl" class="com.cyx.spring.zhujie.service.impl.Practice15ServiceImpl">
         <property name="state" value="甜的" />
     </bean>
 </beans>

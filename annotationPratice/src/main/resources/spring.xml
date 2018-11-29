@@ -23,7 +23,7 @@
 
     <!-- 只扫描expression指定的类 -->
     <!--<context:component-scan base-package="com.cyx.spring" use-default-filters="false">
-        <context:include-filter type="assignable" expression="com.cyx.spring.control.UserControl" />
+        <context:include-filter type="assignable" expression="com.cyx.spring.zhujie.control.UserControl" />
     </context:component-scan>-->
 
     <context:component-scan base-package="com.cyx.spring">
