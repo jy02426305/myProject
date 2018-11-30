@@ -1,3 +1,6 @@
+/*
+同一个线程，一个对象只有一把锁，对象所属的类也有一把类索
+ */
 public class ThreadPractice {
     public static int num;
     public static void main(String[] args) {
