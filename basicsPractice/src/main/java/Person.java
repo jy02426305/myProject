@@ -1,4 +1,10 @@
 public class Person {
+    public static String qq;
+    static{
+        qq="88042711";
+        System.out.println("qq:" + qq);
+    }
+
     private String name;
     private int age;
     private String sex;
