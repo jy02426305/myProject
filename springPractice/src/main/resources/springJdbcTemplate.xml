@@ -3,12 +3,16 @@
        xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-4.2.xsd
        http://www.springframework.org/schema/util
-       http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+       http://www.springframework.org/schema/util/spring-util-4.2.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+">
 
     <context:property-placeholder location="classpath:db.properties" />
 
@@ -25,6 +29,24 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
 
+    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg name="dataSource" ref="dataSource"></constructor-arg>
+    </bean>
+
     <bean id="practice17Dao" class="com.cyx.spring.zhujie.dao.impl.Practice17DaoImpl"></bean>
     <bean id="practice17Service" class="com.cyx.spring.zhujie.service.impl.Practice17ServiceImpl"></bean>
+
+    <bean id="practice18Dao" class="com.cyx.spring.zhujie.dao.impl.Practice18DaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+    <bean id="practice18Service" class="com.cyx.spring.zhujie.service.impl.Practice18ServiceImpl">
+        <property name="practice18Dao" ref="practice18Dao" />
+    </bean>
+
+    <context:component-scan base-package="com.cyx.spring">
+    </context:component-scan>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
 </beans>

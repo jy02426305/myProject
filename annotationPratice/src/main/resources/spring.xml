@@ -2,13 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/aop
-       http://www.springframework.org/schema/aop/spring-aop.xsd">
+       http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- 只扫描resource-pattern指定的组件 -->
     <!--<context:component-scan base-package="com.cyx.spring" resource-pattern="dao/impl/*.class">
@@ -32,7 +32,27 @@
     <context:component-scan base-package="com.cyx.spring">
     </context:component-scan>
 
+    <context:property-placeholder location="classpath:db.properties" />
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driverClassName}" />
+        <property name="jdbcUrl" value="${jdbc.url}" />
+        <property name="user" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="initialPoolSize" value="${jdbc.initPoolSize}" />
+        <property name="maxPoolSize" value="${jdbc.maxPoolSize}" />
+    </bean>
+
     <!--启动对AspectJ注解的支持，proxy-target-class等于true是强制使用cglib代理-->
     <!-- JDK Proxy 和 cglib区别：JDK Proxy只适用于类实现了接口的情况,生成的代理类实现了原类的接口，但和原类没有继承关系。cglib则是生成原来的子类，对于没有实现接口的情况也适用 -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
 </beans>
