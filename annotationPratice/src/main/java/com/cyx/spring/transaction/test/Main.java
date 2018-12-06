@@ -11,6 +11,7 @@ public class Main {
     public static void main(String[] args) {
         ApplicationContext context=new ClassPathXmlApplicationContext("classpath:spring.xml");
         BookShopControl bookShopControl=(BookShopControl)context.getBean("bookShopControl");
-        bookShopControl.buyBook();
+//        bookShopControl.buyBook();
+        bookShopControl.buyBooks();
     }
 }

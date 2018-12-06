@@ -34,7 +34,7 @@ public class BookShopDaoImpl implements BookShopDao{
         String sql2="select balance from user_account where username=?";
         Integer balance=jdbcTemplate.queryForObject(sql2,Integer.class,username);
         if(balance<price){
-            throw new RuntimeException("余额不足！");
+            throw new RuntimeException("这本书"+price+"元，余额不足！");
         }
 
         String sql="update user_account set balance=balance-? where username=?";
