@@ -25,4 +25,11 @@ public class Practice18ServiceImpl implements Practice18Service {
         practice18Dao.updateStock(2);
         practice18Dao.updateAccount("张三", price);
     }
+
+    @Override
+    public void buyBook2(String bookName,int stockId){
+        int price = practice18Dao.getBookPrice(bookName);
+        practice18Dao.updateStock(stockId);
+        practice18Dao.updateAccount("张三", price);
+    }
 }
