@@ -36,5 +36,7 @@ public class Practice18Control {
         for (Map<String, Object> stringObjectMap : list) {
             practice18Service.buyBook2(stringObjectMap.get("bookName").toString(),(int)stringObjectMap.get("stockId"));
         }
+
+        list=null;
     }
 }
