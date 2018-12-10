@@ -43,7 +43,7 @@
     <!-- 2配置事务属性 -->
     <tx:advice transaction-manager="transactionManager" id="txAdvice">
         <tx:attributes>
-            <tx:method name="buyBook2" propagation="REQUIRES_NEW" />
+            <tx:method name="buyBook2" propagation="REQUIRES_NEW" /><!-- REQUIRES_NEW加在service层中才有效（本例中） -->
             <tx:method name="get*" read-only="true" />
             <tx:method name="*" />
         </tx:attributes>

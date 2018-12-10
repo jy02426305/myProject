@@ -23,7 +23,7 @@ public class Practice18Control {
         this.practice18Service = practice18Service;
     }
 
-    public void buyBook2(){
+    public void buyBook3(){
         List<Map<String,Object>> list=new ArrayList<>();
         Map<String,Object> map1=new HashMap<>();
         map1.put("bookName","论语");

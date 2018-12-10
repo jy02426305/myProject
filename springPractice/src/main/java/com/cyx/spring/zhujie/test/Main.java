@@ -11,6 +11,6 @@ public class Main {
     public static void main(String[] args) {
         ApplicationContext context=new ClassPathXmlApplicationContext("classpath:spring-tx.xml");
         Practice18Control practice18Control= (Practice18Control)context.getBean("practice18Control");
-        practice18Control.buyBook2();
+        practice18Control.buyBook3();
     }
 }

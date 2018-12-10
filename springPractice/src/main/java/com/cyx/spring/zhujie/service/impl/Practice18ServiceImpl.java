@@ -18,7 +18,7 @@ public class Practice18ServiceImpl implements Practice18Service {
         this.practice18Dao = practice18Dao;
     }
 
-    @Transactional
+
     @Override
     public void buyBook() {
         int price = practice18Dao.getBookPrice("百年孤独");
