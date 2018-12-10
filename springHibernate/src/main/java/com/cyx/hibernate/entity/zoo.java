@@ -1,9 +1,11 @@
 package com.cyx.hibernate.entity;
 
-public class zoo {
+import java.util.Objects;
+
+public class Zoo {
     private int id;
     private String animalName;
-    private short animalStatus;
+    private Byte animalStatus;
 
     public int getId() {
         return id;
@@ -21,11 +23,26 @@ public class zoo {
         this.animalName = animalName;
     }
 
-    public short getAnimalStatus() {
+    public Byte getAnimalStatus() {
         return animalStatus;
     }
 
-    public void setAnimalStatus(short animalStatus) {
+    public void setAnimalStatus(Byte animalStatus) {
         this.animalStatus = animalStatus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Zoo zoo = (Zoo) o;
+        return id == zoo.id &&
+                Objects.equals(animalName, zoo.animalName) &&
+                Objects.equals(animalStatus, zoo.animalStatus);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, animalName, animalStatus);
     }
 }
