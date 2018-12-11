@@ -53,4 +53,9 @@ public class BookShopDaoImpl implements BookShopDao {
         Query query=getSession().createSQLQuery(sql).setParameter(0,price).setParameter(1,username);
         query.executeUpdate();
     }
+
+    @Override
+    public int addBook(BookShop bookShop){
+        return (Integer) getSession().save(bookShop);
+    }
 }

@@ -10,4 +10,6 @@ public interface BookShopService {
     void updateAccount(String username,int price);
 
     void buyBook(String bookName,int bookId,String username);
+
+    int addBook(BookShop bookShop);
 }

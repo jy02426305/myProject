@@ -23,6 +23,6 @@
         <!--<property name="hibernate.current_session_context_class">thread</property>-->
         <!--3、加载配置文件  -->
         <!--基于xml映射文件： 映射文件加载。路径 -->
-        <!--<mapping resource="com/cyx/hibernate/entity/*.hbm.xml"></mapping>-->
+        <!--<mapping resource="com/cyx/hibernate/entity/BookShop.hbm.xml"></mapping>-->
     </session-factory>
 </hibernate-configuration>

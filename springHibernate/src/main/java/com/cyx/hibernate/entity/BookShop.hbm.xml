@@ -1,12 +1,14 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-
-    <class name="com.cyx.hibernate.entity.BookShop" table="book_shop" schema="practice">
-        <id name="id" column="id"/>
-        <property name="bookName" column="bookName"/>
-        <property name="price" column="price"/>
+    <class name="com.cyx.hibernate.entity.BookShop" table="book_shop">
+        <id name="bid" type="java.lang.Integer">
+            <column name="bid" />
+            <generator class="native" />
+        </id>
+        <property name="bookName" column="bookName" type="java.lang.String" />
+        <property name="price" column="price" type="java.lang.Integer" />
     </class>
 </hibernate-mapping>

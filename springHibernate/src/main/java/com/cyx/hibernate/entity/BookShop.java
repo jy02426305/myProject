@@ -1,19 +1,18 @@
 package com.cyx.hibernate.entity;
 
-import java.util.Objects;
-
 public class BookShop {
-    private int id;
+    private int bid;
+
+    public int getBid() {
+        return bid;
+    }
+
+    public void setBid(int bid) {
+        this.bid = bid;
+    }
+
     private String bookName;
-    private Integer price;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    private int price;
 
     public String getBookName() {
         return bookName;
@@ -23,26 +22,11 @@ public class BookShop {
         this.bookName = bookName;
     }
 
-    public Integer getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(int price) {
         this.price = price;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BookShop bookShop = (BookShop) o;
-        return id == bookShop.id &&
-                Objects.equals(bookName, bookShop.bookName) &&
-                Objects.equals(price, bookShop.price);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, bookName, price);
     }
 }
