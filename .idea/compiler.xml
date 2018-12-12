@@ -8,16 +8,20 @@
         <outputRelativeToContentRoot value="true" />
         <module name="annotationPratice" />
         <module name="basicsPractice" />
+        <module name="gcPractice" />
         <module name="springHibernate" />
         <module name="springPractice" />
+        <module name="springWeb" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="annotationPratice" target="1.8" />
       <module name="basicsPractice" target="1.8" />
+      <module name="gcPractice" target="1.5" />
       <module name="springHibernate" target="1.8" />
       <module name="springMaven" target="1.5" />
       <module name="springPractice" target="1.8" />
+      <module name="springWeb" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

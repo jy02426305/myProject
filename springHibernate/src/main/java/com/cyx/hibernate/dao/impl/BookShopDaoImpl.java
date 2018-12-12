@@ -2,6 +2,7 @@ package com.cyx.hibernate.dao.impl;
 
 import com.cyx.hibernate.dao.BookShopDao;
 import com.cyx.hibernate.entity.BookShop;
+import com.cyx.hibernate.entity.BookStock;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
@@ -57,5 +58,15 @@ public class BookShopDaoImpl implements BookShopDao {
     @Override
     public int addBook(BookShop bookShop){
         return (Integer) getSession().save(bookShop);
+    }
+
+    @Override
+    public BookStock getBookStock(int id) {
+        return getSession().get(BookStock.class,id);
+    }
+
+    @Override
+    public BookShop getBookShop(int id){
+        return getSession().get(BookShop.class,id);
     }
 }

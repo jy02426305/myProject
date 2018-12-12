@@ -11,6 +11,16 @@ public class BookShop {
         this.bid = bid;
     }
 
+    private BookStock bookStock;
+
+    public BookStock getBookStock() {
+        return bookStock;
+    }
+
+    public void setBookStock(BookStock bookStock) {
+        this.bookStock = bookStock;
+    }
+
     private String bookName;
     private int price;
 

@@ -30,19 +30,4 @@ public class BookStock {
     public void setBookId(Integer bookId) {
         this.bookId = bookId;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BookStock bookStock = (BookStock) o;
-        return id == bookStock.id &&
-                Objects.equals(stock, bookStock.stock) &&
-                Objects.equals(bookId, bookStock.bookId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, stock, bookId);
-    }
 }

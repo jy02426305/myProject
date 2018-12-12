@@ -4,9 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/annotationPratice/annotationPratice.iml" filepath="$PROJECT_DIR$/annotationPratice/annotationPratice.iml" />
       <module fileurl="file://$PROJECT_DIR$/basicsPractice/basicsPractice.iml" filepath="$PROJECT_DIR$/basicsPractice/basicsPractice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gcPractice/gcPractice.iml" filepath="$PROJECT_DIR$/gcPractice/gcPractice.iml" />
       <module fileurl="file://$PROJECT_DIR$/myProject.iml" filepath="$PROJECT_DIR$/myProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/springHibernate/springHibernate.iml" filepath="$PROJECT_DIR$/springHibernate/springHibernate.iml" />
       <module fileurl="file://$PROJECT_DIR$/springPractice/springPractice.iml" filepath="$PROJECT_DIR$/springPractice/springPractice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springWeb/springWeb.iml" filepath="$PROJECT_DIR$/springWeb/springWeb.iml" />
     </modules>
   </component>
 </project>
