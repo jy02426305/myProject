@@ -21,7 +21,7 @@
       <module name="springHibernate" target="1.8" />
       <module name="springMaven" target="1.5" />
       <module name="springPractice" target="1.8" />
-      <module name="springWeb" target="1.5" />
+      <module name="springWeb" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
