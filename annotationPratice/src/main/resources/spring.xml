@@ -45,7 +45,7 @@
 
     <!--启动对AspectJ注解的支持，proxy-target-class等于true是强制使用cglib代理-->
     <!-- JDK Proxy 和 cglib区别：JDK Proxy只适用于类实现了接口的情况,生成的代理类实现了原类的接口，但和原类没有继承关系。cglib则是生成原来的子类，对于没有实现接口的情况也适用 -->
-    <aop:aspectj-autoproxy proxy-target-class="true" />
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource" />
@@ -54,5 +54,6 @@
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
+    <!-- 开启对声明式事物的注解支持 -->
     <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
 </beans>
