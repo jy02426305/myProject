@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/springMvc" />
+    <file type="web" url="file://$PROJECT_DIR$/springRedis" />
     <file type="web" url="file://$PROJECT_DIR$/springWeb" />
   </component>
   <component name="MavenProjectsManager">
@@ -12,6 +14,8 @@
         <option value="$PROJECT_DIR$/springHibernate/pom.xml" />
         <option value="$PROJECT_DIR$/gcPractice/pom.xml" />
         <option value="$PROJECT_DIR$/springWeb/pom.xml" />
+        <option value="$PROJECT_DIR$/springMvc/pom.xml" />
+        <option value="$PROJECT_DIR$/springRedis/pom.xml" />
       </list>
     </option>
   </component>

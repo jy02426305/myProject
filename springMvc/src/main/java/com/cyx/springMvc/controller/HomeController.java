@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import sun.awt.SunHints;
 
 @Controller
 @RequestMapping(value = "/home")
@@ -19,7 +18,7 @@ public class HomeController {
         return mav;
     }
 
-    @RequestMapping(value = "/getModel")
+    @RequestMapping(value = "/getModel",produces="text/html;charset=UTF-8")
     @ResponseBody
     public String getModel(Integer id){
         return "获取id："+id;
