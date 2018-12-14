@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="springMvc:war exploded">
-    <output-path>$PROJECT_DIR$/springMvc/target/springMvc</output-path>
+    <output-path>$PROJECT_DIR$/out/artifacts/springMvc_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -20,9 +20,6 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.7" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.7" />
         </element>
-      </element>
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/springMvc/target/springMvc/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="springMvc/web/Web" />
     </root>

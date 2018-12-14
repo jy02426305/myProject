@@ -62,7 +62,7 @@
       <version>${springVersion}</version>
     </dependency>
 
-    <!-- jackson start 解决乱码问题，支持控制器返回数组/对象/集合 -->
+    <!-- jackson start 可解决乱码问题，支持控制器返回数组/对象/集合 -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>

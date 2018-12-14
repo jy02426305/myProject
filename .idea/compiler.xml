@@ -12,6 +12,7 @@
         <module name="springHibernate" />
         <module name="springMvc" />
         <module name="springPractice" />
+        <module name="springRedis" />
         <module name="springWeb" />
       </profile>
     </annotationProcessing>
@@ -20,10 +21,13 @@
       <module name="basicsPractice" target="1.8" />
       <module name="gcPractice" target="1.5" />
       <module name="springHibernate" target="1.8" />
-      <module name="springMaven" target="1.5" />
       <module name="springMvc" target="1.7" />
       <module name="springPractice" target="1.8" />
+      <module name="springRedis" target="1.7" />
       <module name="springWeb" target="1.7" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-encoding utf-8" />
   </component>
 </project>

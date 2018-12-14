@@ -3,6 +3,7 @@ package com.cyx.hibernate.dao.impl;
 import com.cyx.hibernate.dao.BookShopDao;
 import com.cyx.hibernate.entity.BookShop;
 import com.cyx.hibernate.entity.BookStock;
+import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
