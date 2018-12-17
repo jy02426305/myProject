@@ -17,6 +17,7 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
+          <unit-entry name="a.xml" value="0e4976c1-5dc7-4476-87e1-0a428d342bf1" />
           <unit-entry name="hibernate.cfg.xml" />
           <unit-entry name="sessionFactory" value="mySqlDataSource" />
         </datasource-map>
@@ -69,6 +70,6 @@
     <orderEntry type="library" name="Maven: javax.activation:javax.activation-api:1.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.dom4j:dom4j:2.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate.common:hibernate-commons-annotations:5.0.4.Final" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.0.35" level="application_server_libraries" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.35" level="application_server_libraries" />
   </component>
 </module>

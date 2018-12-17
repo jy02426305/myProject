@@ -7,7 +7,7 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
-    <context:component-scan base-package="com.cyx.project">
+    <context:component-scan base-package="com.cyx">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
@@ -54,7 +54,7 @@
         <property name="configLocation" value="classpath:hibernate.cfg.xml" />
         <property name="packagesToScan">
             <list>
-                <value>com.cyx.common.entity</value>
+                <value>com.cyx.common.sys.entity</value>
             </list>
         </property>
         <!--<property name="mappingLocations" value="com/ideatc/hibernate/entity/*.hbm.xml" />-->

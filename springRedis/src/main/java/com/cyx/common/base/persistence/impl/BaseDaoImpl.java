@@ -1,6 +1,6 @@
-package com.cyx.common.dao.impl;
+package com.cyx.common.base.persistence.impl;
 
-import com.cyx.common.dao.BaseDao;
+import com.cyx.common.base.persistence.BaseDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
@@ -17,10 +17,8 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
 
     @Autowired
     private SessionFactory sessionFactory;
-
     // 存储泛型的实际参数
     private Class<T> clazz;
-
     public BaseDaoImpl(){
         // 谁实现该类，这就是谁的类字节码
         Class c = this.getClass();
@@ -66,7 +64,7 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
     }
 
     @Override
-    public void deleteById(PK id){
+    public void delete(PK id){
         getSession().delete(get(id));
     }
 
