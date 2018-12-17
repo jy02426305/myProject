@@ -1,5 +1,5 @@
 package com.cyx.spring.fanxingyilaizhuru.service;
 
-public interface BaseService {
+public interface BaseService<T> {
     void say();
 }

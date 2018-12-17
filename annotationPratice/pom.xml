@@ -8,7 +8,7 @@
     <artifactId>annotationPratice</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <springVersion>5.1.2.RELEASE</springVersion>
+        <springVersion>5.1.3.RELEASE</springVersion>
         <mysqlVersion>8.0.13</mysqlVersion>
     </properties>
     <!-- 指定maven编译的jdk版本,如果不指定,maven3默认用jdk 1.5 maven2默认用jdk1.3，jdk1.5及以下，用@Override 会报编译错误-->
@@ -62,7 +62,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
-            <version>5.1.2.RELEASE</version>
+            <version>${springVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
@@ -93,7 +93,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>5.1.3.RELEASE</version>
+            <version>${springVersion}</version>
         </dependency>
         <!-- end -->
     </dependencies>

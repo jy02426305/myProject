@@ -1,4 +1,4 @@
 package com.cyx.spring.fanxingyilaizhuru.service;
 
-public interface AnimalService extends BaseService {
+public interface AnimalService<T> extends BaseService<T> {
 }

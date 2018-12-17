@@ -5,5 +5,5 @@ import com.cyx.spring.fanxingyilaizhuru.service.PersonService;
 import org.springframework.stereotype.Service;
 
 @Service(value="personService")
-public class PersonServiceImpl extends BaseServiceImpl<Person> implements PersonService {
+public class PersonServiceImpl extends BaseServiceImpl<Person> implements PersonService<Person> {
 }

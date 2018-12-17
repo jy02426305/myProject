@@ -12,9 +12,9 @@ public class HomeController {
     @Autowired
     private MemberService memberService;
 
-    @RequestMapping(value = "/say")
+    @RequestMapping(value = "/say",produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String say(){
-        return memberService.testMethod1("hello");
+        return memberService.testMethod1("你好");
     }
 }

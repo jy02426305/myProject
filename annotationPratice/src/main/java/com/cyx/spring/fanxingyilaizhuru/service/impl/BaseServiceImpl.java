@@ -4,7 +4,7 @@ import com.cyx.spring.fanxingyilaizhuru.dao.BaseDao;
 import com.cyx.spring.fanxingyilaizhuru.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class BaseServiceImpl<T> implements BaseService {
+public class BaseServiceImpl<T> implements BaseService<T> {
     @Autowired
     private BaseDao<T> baseDao;
 

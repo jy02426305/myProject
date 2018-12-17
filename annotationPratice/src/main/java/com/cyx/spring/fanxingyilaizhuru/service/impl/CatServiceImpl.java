@@ -5,5 +5,5 @@ import com.cyx.spring.fanxingyilaizhuru.service.AnimalService;
 import org.springframework.stereotype.Service;
 
 @Service(value="catService")
-public class CatServiceImpl extends BaseServiceImpl<Cat> implements AnimalService {
+public class CatServiceImpl extends BaseServiceImpl<Cat> implements AnimalService<Cat> {
 }
