@@ -75,7 +75,7 @@
 
     <!-- 配置事务切入点以及事务和切点的关联 -->
     <aop:config>
-        <aop:pointcut id="txPointcut" expression="execution(* com.cyx.project.service.*.*(..))" />
+        <aop:pointcut id="txPointcut" expression="execution(* com.cyx..*.service.*.*(..))" />
         <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
     </aop:config>
 </beans>
