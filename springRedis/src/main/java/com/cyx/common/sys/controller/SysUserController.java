@@ -19,8 +19,13 @@ public class SysUserController {
     @RequestMapping(value = "/list")
     public ModelAndView list(){
         ModelAndView view=new ModelAndView("admin/sysUser/list.jsp");
-        List<SysUser> list= sysUserService.sqlQueryList("select * from sys_user",null);
-        view.addObject("list",list);
+        try{
+
+            List<SysUser> list= sysUserService.sqlQueryList("select * from sys_user where id>?",new Object[]{1});
+            view.addObject("list",list);
+        }catch (Exception ex){
+            System.out.println(ex);
+        }
         return view;
     }
 }

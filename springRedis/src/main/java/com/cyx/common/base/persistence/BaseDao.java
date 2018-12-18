@@ -3,6 +3,7 @@ package com.cyx.common.base.persistence;
 import org.hibernate.Session;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 public interface BaseDao<T,PK extends Serializable> {
@@ -41,18 +42,34 @@ public interface BaseDao<T,PK extends Serializable> {
     void batchUpdate(List<T> entityList);
 
     /**
-     * 条件查询
+     * hql条件查询
      * @param hql
-     * @param objects
+     * @param params
      * @return
      */
-    List<T> hqlQueryList(String hql,Object[] objects);
+    List<T> hqlQueryList(String hql,Object[] params);
+
+    /**
+     * hql条件查询
+     * @param hql
+     * @param params
+     * @return
+     */
+    List<T> hqlQueryList(String hql, HashMap<String,Object> params);
 
     /**
      * sql条件查询
      * @param sql
-     * @param objects
+     * @param params
      * @return
      */
-    List<T> sqlQueryList(String sql,Object[] objects);
+    List<T> sqlQueryList(String sql,Object[] params);
+
+    /**
+     * sql条件查询
+     * @param sql
+     * @param params
+     * @return
+     */
+    List<T> sqlQueryList(String sql,HashMap<String,Object> params);
 }

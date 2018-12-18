@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.List;
+import java.util.*;
 
 public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
     private final static int BATCH_SIZE = 50;
@@ -136,17 +136,36 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
     }
 
     /**
-     * 条件查询
+     * hql条件查询
      * @param hql
-     * @param objects
+     * @param params
      * @return
      */
     @Override
-    public List<T> hqlQueryList(String hql,Object[] objects){
+    public List<T> hqlQueryList(String hql,Object[] params){
         Query query = getSession().createQuery(hql);
-        if(objects!=null){
-            for (int i = 0; i < objects.length; i++) {
-                query.setParameter(i,objects[i]);
+        if(params!=null){
+            for (int i = 0,len=params.length; i < len; i++) {
+                query.setParameter(i+1,params[i]);
+            }
+        }
+        return query.list();
+    }
+
+    /**
+     * hql条件查询
+     * @param hql
+     * @param params
+     * @return
+     */
+    @Override
+    public List<T> hqlQueryList(String hql, HashMap<String,Object> params){
+        Query query = getSession().createQuery(hql);
+        if(params!=null){
+            Iterator iterator=params.entrySet().iterator();
+            while (iterator.hasNext()){
+                Map.Entry entry=(Map.Entry)iterator.next();
+                query.setParameter(entry.getKey().toString(),entry.getValue());
             }
         }
         return query.list();
@@ -155,17 +174,36 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
     /**
      * sql条件查询
      * @param sql
-     * @param objects
+     * @param params
      * @return
      */
     @Override
-    public List<T> sqlQueryList(String sql,Object[] objects){
-        NativeQuery<T> nativeQuery= getSession().createNativeQuery(sql,clazz);
-        if(objects!=null){
-            for (int i = 0; i < objects.length; i++) {
-                nativeQuery.setParameter(i,objects[i]);
+    public List<T> sqlQueryList(String sql,Object[] params){
+        NativeQuery<T> query= getSession().createNativeQuery(sql,clazz);
+        if(params!=null){
+            for (int i = 0,len=params.length; i < len; i++) {
+                query.setParameter(i+1,params[i]);
             }
         }
-        return nativeQuery.list();
+        return query.list();
+    }
+
+    /**
+     * sql条件查询
+     * @param sql
+     * @param params
+     * @return
+     */
+    @Override
+    public List<T> sqlQueryList(String sql, HashMap<String,Object> params){
+        NativeQuery<T> query = getSession().createNativeQuery(sql,clazz);
+        if(params!=null){
+            Iterator iterator=params.entrySet().iterator();
+            while (iterator.hasNext()){
+                Map.Entry entry=(Map.Entry)iterator.next();
+                query.setParameter(entry.getKey().toString(),entry.getValue());
+            }
+        }
+        return query.list();
     }
 }

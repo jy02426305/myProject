@@ -5,6 +5,6 @@ import com.cyx.common.sys.dao.SysUserDao;
 import com.cyx.common.sys.entity.SysUser;
 import org.springframework.stereotype.Repository;
 
-@Repository(value="sysUserDaoI")
+@Repository(value="sysUserDao")
 public class SysUserDaoImpl extends BaseDaoImpl<SysUser,Integer> implements SysUserDao {
 }
