@@ -2,6 +2,7 @@ package com.cyx.project.modules.sys.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "sys_user")
@@ -9,6 +10,7 @@ public class SysUser implements Serializable {
     private int id;
     private String username;
     private String password;
+    private List<SysUserRole> sysUserRoleList;
 
     @Id
     @GeneratedValue(strategy =GenerationType.IDENTITY)
@@ -39,5 +41,15 @@ public class SysUser implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Basic
+    @OneToMany(mappedBy = "sysUser",fetch = FetchType.LAZY)
+    public List<SysUserRole> getSysUserRoleList() {
+        return sysUserRoleList;
+    }
+
+    public void setSysUserRoleList(List<SysUserRole> sysUserRoleList) {
+        this.sysUserRoleList = sysUserRoleList;
     }
 }

@@ -1,5 +1,6 @@
 package com.cyx.project.common.base.service.impl;
 
+import com.cyx.project.common.base.dto.Page;
 import com.cyx.project.common.base.persistence.BaseDao;
 import com.cyx.project.common.base.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,5 +92,15 @@ public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<
     @Override
     public int sqlQueryCountByParamName(String sql, HashMap<String, Object> params) {
         return baseDao.sqlQueryCountByParamName(sql,params);
+    }
+
+    @Override
+    public Page<T> sqlQueryPage(String sql, Object[] params, int pageIndex, int pageSize) {
+        return baseDao.sqlQueryPage(sql,params,pageIndex,pageSize);
+    }
+
+    @Override
+    public Page<T> sqlQueryPageByParamName(String sql, HashMap<String, Object> params, int pageIndex, int pageSize) {
+        return baseDao.sqlQueryPageByParamName(sql,params,pageIndex,pageSize);
     }
 }

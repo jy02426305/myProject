@@ -222,7 +222,7 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
      */
     @Override
     public int sqlQueryCount(String sql, Object[] params) {
-        NativeQuery sqlQuery = getSession().createSQLQuery(sql);
+        NativeQuery sqlQuery = getSession().createNativeQuery(sql);
         if(params!=null){
             for (int i = 0,len=params.length; i < len; i++) {
                 sqlQuery.setParameter(i+1,params[i]);
@@ -240,7 +240,7 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
      */
     @Override
     public int sqlQueryCountByParamName(String sql, HashMap<String, Object> params) {
-        NativeQuery sqlQuery = getSession().createSQLQuery(sql);
+        NativeQuery sqlQuery = getSession().createNativeQuery(sql);
         if(params!=null){
             Iterator iterator=params.entrySet().iterator();
             while (iterator.hasNext()){
@@ -252,9 +252,84 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
         return total.intValue();
     }
 
+    /**
+     * sql分页分页查询
+     * @param sql
+     * @param params
+     * @param pageIndex
+     * @param pageSize
+     * @return
+     */
     @Override
-    public Page<T> sqlQueryPage(String sql,Object[] params,Page page){
+    public Page<T> sqlQueryPage(String sql,Object[] params,int pageIndex,int pageSize){
+        NativeQuery<T> sqlQuery=getSession().createNativeQuery(sql,clazz);
+        String countSql="select count(*) from ("+sql+") t";
+        NativeQuery countQuery = getSession().createSQLQuery(countSql);
+        if(params!=null){
+            for (int i = 0,len=params.length; i < len; i++) {
+                sqlQuery.setParameter(i+1,params[i]);
+                countQuery.setParameter(i+1,params[i]);
+            }
+        }
+        Page<T> page=new Page<>();
+        int count=((BigInteger)countQuery.uniqueResult()).intValue();
+        pageIndex=pageIndex>0?pageIndex:1;
+        if(!canPage(pageIndex,pageSize,count)){
+            return page;
+        }
+        List<T> list=sqlQuery.setFirstResult((pageIndex-1)*pageSize).setMaxResults(pageSize).list();
+        page.setCount(count);
+        page.setData(list);
+        return page;
+    }
 
-        return null;
+    /**
+     * sql分页分页查询
+     * @param sql
+     * @param params
+     * @param pageIndex
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public Page<T> sqlQueryPageByParamName(String sql,HashMap<String,Object> params,int pageIndex,int pageSize){
+        long start= System.currentTimeMillis();
+        NativeQuery<T> sqlQuery=getSession().createNativeQuery(sql,clazz);
+        String countSql="select count(*) from ("+sql+") t";
+        NativeQuery countQuery = getSession().createSQLQuery(countSql);
+        if(params!=null){
+            Iterator iterator=params.entrySet().iterator();
+            while (iterator.hasNext()){
+                Map.Entry entry=(Map.Entry)iterator.next();
+                sqlQuery.setParameter(entry.getKey().toString(),entry.getValue());
+                countQuery.setParameter(entry.getKey().toString(),entry.getValue());
+            }
+        }
+        Page<T> page=new Page<>();
+        int count=((BigInteger)countQuery.uniqueResult()).intValue();
+        pageIndex=pageIndex>0?pageIndex:1;
+        if(!canPage(pageIndex,pageSize,count)){
+            return page;
+        }
+        List<T> list=sqlQuery.setFirstResult((pageIndex-1)*pageSize).setMaxResults(pageSize).list();
+        page.setCount(count);
+        page.setData(list);
+        long end=System.currentTimeMillis();
+        System.out.println("用时：" + (end - start));
+        return page;
+    }
+
+    /**
+     * 判断能否分页查询 ，页码从1开始
+     * @param pageIndex
+     * @param pageSize
+     * @param total
+     * @return
+     */
+    private boolean canPage(int pageIndex, int pageSize, int total) {
+        if ((pageIndex - 1) > 0 && (pageIndex - 1) * pageSize >= total) {
+            return false;
+        }
+        return true;
     }
 }

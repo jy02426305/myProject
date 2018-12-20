@@ -1,5 +1,7 @@
 package com.cyx.project.common.base.service;
 
+import com.cyx.project.common.base.dto.Page;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -84,4 +86,24 @@ public interface BaseService<T,PK extends Serializable> {
      * @return
      */
     int sqlQueryCountByParamName(String sql,HashMap<String,Object> params);
+
+    /**
+     * sql分页分页查询
+     * @param sql
+     * @param params
+     * @param pageIndex
+     * @param pageSize
+     * @return
+     */
+    Page<T> sqlQueryPage(String sql, Object[] params, int pageIndex, int pageSize);
+
+    /**
+     * sql分页分页查询
+     * @param sql
+     * @param params
+     * @param pageIndex
+     * @param pageSize
+     * @return
+     */
+    Page<T> sqlQueryPageByParamName(String sql,HashMap<String,Object> params,int pageIndex,int pageSize);
 }

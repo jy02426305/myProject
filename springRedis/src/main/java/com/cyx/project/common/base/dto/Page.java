@@ -7,10 +7,6 @@ public class Page<T> {
     private int count;
     //数据集
     private List<T> data;
-    //当前页
-    private int page;
-    //每页显示数量
-    private int limit;
 
     public int getCount() {
         return count;
@@ -26,21 +22,5 @@ public class Page<T> {
 
     public void setData(List<T> data) {
         this.data = data;
-    }
-
-    public int getPage() {
-        return page;
-    }
-
-    public void setPage(int page) {
-        this.page = page;
-    }
-
-    public int getLimit() {
-        return limit;
-    }
-
-    public void setLimit(int limit) {
-        this.limit = limit;
     }
 }
