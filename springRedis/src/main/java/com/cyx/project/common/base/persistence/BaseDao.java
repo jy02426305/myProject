@@ -47,7 +47,7 @@ public interface BaseDao<T,PK extends Serializable> {
      * @param params
      * @return
      */
-    List<T> hqlQueryList(String hql,Object[] params);
+    List<T> hqlQueryList(String hql, HashMap<Integer, Object> params);
 
     /**
      * hql条件查询
@@ -55,7 +55,7 @@ public interface BaseDao<T,PK extends Serializable> {
      * @param params
      * @return
      */
-    List<T> hqlQueryList(String hql, HashMap<String,Object> params);
+    List<T> hqlQueryListByParamName(String hql, HashMap<String, Object> params);
 
     /**
      * sql条件查询
@@ -63,7 +63,7 @@ public interface BaseDao<T,PK extends Serializable> {
      * @param params
      * @return
      */
-    List<T> sqlQueryList(String sql,Object[] params);
+    List<T> sqlQueryList(String sql, Object[] params);
 
     /**
      * sql条件查询
@@ -71,5 +71,21 @@ public interface BaseDao<T,PK extends Serializable> {
      * @param params
      * @return
      */
-    List<T> sqlQueryList(String sql,HashMap<String,Object> params);
+    List<T> sqlQueryListByParamName(String sql, HashMap<String, Object> params);
+
+    /**
+     * sql查询总记录数
+     * @param sql
+     * @param params
+     * @return
+     */
+    int sqlQueryCount(String sql, Object[] params);
+
+    /**
+     * sql查询总记录数
+     * @param sql
+     * @param params
+     * @return
+     */
+    int sqlQueryCountByParamName(String sql,HashMap<String,Object> params);
 }

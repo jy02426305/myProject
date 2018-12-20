@@ -64,8 +64,13 @@ public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<
     }
 
     @Override
-    public List<T> hqlQueryList(String hql, Object[] objects) {
-        return baseDao.hqlQueryList(hql,objects);
+    public List<T> hqlQueryList(String hql,HashMap<Integer,Object> params) {
+        return baseDao.hqlQueryList(hql,params);
+    }
+
+    @Override
+    public List<T> hqlQueryListByParamName(String hql, HashMap<String, Object> params) {
+        return baseDao.hqlQueryListByParamName(hql,params);
     }
 
     @Override
@@ -74,12 +79,17 @@ public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<
     }
 
     @Override
-    public List<T> hqlQueryList(String hql, HashMap<String, Object> params) {
-        return baseDao.hqlQueryList(hql,params);
+    public List<T> sqlQueryListByParamName(String sql, HashMap<String, Object> params) {
+        return baseDao.sqlQueryListByParamName(sql,params);
     }
 
     @Override
-    public List<T> sqlQueryList(String sql, HashMap<String, Object> params) {
-        return baseDao.sqlQueryList(sql,params);
+    public int sqlQueryCount(String sql, Object[] params) {
+        return baseDao.sqlQueryCount(sql,params);
+    }
+
+    @Override
+    public int sqlQueryCountByParamName(String sql, HashMap<String, Object> params) {
+        return baseDao.sqlQueryCountByParamName(sql,params);
     }
 }

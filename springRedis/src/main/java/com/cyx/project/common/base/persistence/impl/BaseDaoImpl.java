@@ -1,5 +1,6 @@
 package com.cyx.project.common.base.persistence.impl;
 
+import com.cyx.project.common.base.dto.Page;
 import com.cyx.project.common.base.persistence.BaseDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,7 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
     private final static int BATCH_SIZE = 50;
@@ -136,17 +141,19 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
     }
 
     /**
-     * hql条件查询
+     * hql条件查询，hql语句占位符必须要 ?0 带索引值的形式（蛋疼的改动）
      * @param hql
      * @param params
      * @return
      */
     @Override
-    public List<T> hqlQueryList(String hql,Object[] params){
+    public List<T> hqlQueryList(String hql,HashMap<Integer,Object> params){
         Query query = getSession().createQuery(hql);
         if(params!=null){
-            for (int i = 0,len=params.length; i < len; i++) {
-                query.setParameter(i+1,params[i]);
+            Iterator iterator=params.entrySet().iterator();
+            while (iterator.hasNext()){
+                Map.Entry entry=(Map.Entry)iterator.next();
+                query.setParameter((int)entry.getKey() ,entry.getValue());
             }
         }
         return query.list();
@@ -159,7 +166,7 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
      * @return
      */
     @Override
-    public List<T> hqlQueryList(String hql, HashMap<String,Object> params){
+    public List<T> hqlQueryListByParamName(String hql, HashMap<String,Object> params){
         Query query = getSession().createQuery(hql);
         if(params!=null){
             Iterator iterator=params.entrySet().iterator();
@@ -195,7 +202,7 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
      * @return
      */
     @Override
-    public List<T> sqlQueryList(String sql, HashMap<String,Object> params){
+    public List<T> sqlQueryListByParamName(String sql, HashMap<String,Object> params){
         NativeQuery<T> query = getSession().createNativeQuery(sql,clazz);
         if(params!=null){
             Iterator iterator=params.entrySet().iterator();
@@ -205,5 +212,49 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
             }
         }
         return query.list();
+    }
+
+    /**
+     * sql查询总记录数
+     * @param sql
+     * @param params
+     * @return
+     */
+    @Override
+    public int sqlQueryCount(String sql, Object[] params) {
+        NativeQuery sqlQuery = getSession().createSQLQuery(sql);
+        if(params!=null){
+            for (int i = 0,len=params.length; i < len; i++) {
+                sqlQuery.setParameter(i+1,params[i]);
+            }
+        }
+        BigInteger total= (BigInteger) sqlQuery.uniqueResult();
+        return total.intValue();
+    }
+
+    /**
+     * sql查询总记录数
+     * @param sql
+     * @param params
+     * @return
+     */
+    @Override
+    public int sqlQueryCountByParamName(String sql, HashMap<String, Object> params) {
+        NativeQuery sqlQuery = getSession().createSQLQuery(sql);
+        if(params!=null){
+            Iterator iterator=params.entrySet().iterator();
+            while (iterator.hasNext()){
+                Map.Entry entry=(Map.Entry)iterator.next();
+                sqlQuery.setParameter(entry.getKey().toString(),entry.getValue());
+            }
+        }
+        BigInteger total= (BigInteger) sqlQuery.uniqueResult();
+        return total.intValue();
+    }
+
+    @Override
+    public Page<T> sqlQueryPage(String sql,Object[] params,Page page){
+
+        return null;
     }
 }

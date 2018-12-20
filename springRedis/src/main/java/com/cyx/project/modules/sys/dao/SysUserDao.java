@@ -3,6 +3,7 @@ package com.cyx.project.modules.sys.dao;
 import com.cyx.project.common.base.persistence.BaseDao;
 import com.cyx.project.modules.sys.entity.SysUser;
 
-public interface SysUserDao extends BaseDao<SysUser,Integer> {
+import java.util.HashMap;
 
+public interface SysUserDao extends BaseDao<SysUser,Integer> {
 }
