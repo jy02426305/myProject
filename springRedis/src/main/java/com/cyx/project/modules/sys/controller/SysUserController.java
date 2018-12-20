@@ -45,7 +45,7 @@ public class SysUserController {
 
             //级联
             SysUser sysUser= sysUserService.get(274);
-            System.out.println(sysUser.getUsername());
+            System.out.println(sysUser.getSysUserRoleList().size());
         }catch (Exception ex){
             System.out.println(ex);
         }

@@ -78,4 +78,7 @@
         <aop:pointcut id="txPointcut" expression="execution(* com.cyx.project..*.service.*.*(..))" />
         <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
     </aop:config>
+
+    <!-- 开启对声明式事物的注解支持 -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
 </beans>

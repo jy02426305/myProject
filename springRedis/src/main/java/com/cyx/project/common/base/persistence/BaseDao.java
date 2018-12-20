@@ -2,6 +2,7 @@ package com.cyx.project.common.base.persistence;
 
 import com.cyx.project.common.base.dto.Page;
 import org.hibernate.Session;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 
 import java.io.Serializable;
 import java.util.HashMap;
