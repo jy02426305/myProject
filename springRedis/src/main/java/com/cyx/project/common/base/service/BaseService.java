@@ -5,7 +5,7 @@ import com.cyx.project.common.base.dto.Page;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
-
+@Deprecated
 public interface BaseService<T,PK extends Serializable> {
     T get(PK id);
 

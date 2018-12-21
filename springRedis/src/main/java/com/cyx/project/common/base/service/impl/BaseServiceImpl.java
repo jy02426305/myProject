@@ -9,6 +9,12 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
+/*
+暴露到view，hibernate级联查询会有no seesion问题(https://www.jianshu.com/p/1a8343292c4a)
+需要另外在web.xml配置OpenSessionInViewFilter，或在spring配置OpenSessionInViewInterceptor
+但seesion在view开关，影响效率(https://www.iteye.com/topic/17501)，还有懒加载异常(没测试过)？
+ */
+@Deprecated
 public class BaseServiceImpl<T, PK extends Serializable> implements BaseService<T, PK> {
 
     @Autowired

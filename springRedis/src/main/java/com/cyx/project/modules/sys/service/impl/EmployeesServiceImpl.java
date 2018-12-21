@@ -6,5 +6,5 @@ import com.cyx.project.modules.sys.service.EmployeesService;
 import org.springframework.stereotype.Service;
 
 @Service(value = "employeesService")
-public class EmployeesServiceImpl extends BaseServiceImpl<Employees,Integer> implements EmployeesService {
+public class EmployeesServiceImpl implements EmployeesService {
 }

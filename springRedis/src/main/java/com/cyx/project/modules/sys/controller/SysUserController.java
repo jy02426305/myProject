@@ -44,8 +44,12 @@ public class SysUserController {
 //            System.out.println(page.getCount());
 
             //级联
-            SysUser sysUser= sysUserService.get(274);
-            System.out.println(sysUser.getSysUserRoleList().size());
+//            SysUser sysUser= sysUserService.get(1);
+//            System.out.println(sysUser.getUsername());
+
+            System.out.println("权限数量："+sysUserService.testGetSysUser(1));
+
+//            sysUserService.sqlQueryList()
         }catch (Exception ex){
             System.out.println(ex);
         }
