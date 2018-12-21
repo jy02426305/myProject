@@ -47,8 +47,9 @@ public class SysUserController {
 //            SysUser sysUser= sysUserService.get(1);
 //            System.out.println(sysUser.getUsername());
 
-            System.out.println("权限数量："+sysUserService.testGetSysUser(1));
-
+            System.out.println("权限数量："+sysUserService.testGetSysUser(274));
+//            Employees employees = employeesService.testGet(10001);
+//            System.out.println(employees.getFirstName());
 //            sysUserService.sqlQueryList()
         }catch (Exception ex){
             System.out.println(ex);

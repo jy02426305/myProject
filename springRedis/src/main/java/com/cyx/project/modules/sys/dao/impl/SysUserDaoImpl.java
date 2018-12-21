@@ -9,4 +9,5 @@ import java.util.HashMap;
 
 @Repository(value="sysUserDao")
 public class SysUserDaoImpl extends BaseDaoImpl<SysUser,Integer> implements SysUserDao {
+
 }

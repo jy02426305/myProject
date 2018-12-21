@@ -21,7 +21,14 @@
         <property name="hibernate.connection.isolation">2</property>
         <!-- 设定一次最多可以提交多少sql语句的上限,提高sql语句的执行效率 。 -->
         <property name="hibernate.jdbc.batch_size">50</property>
-
+        <!--二级缓存-->
+        <!--<property name="hibernate.cache.use_second_level_cache">true</property>&lt;!&ndash; 开启二级缓存 &ndash;&gt;
+        <property name="hibernate.cache.use_query_cache">true</property>&lt;!&ndash; 开启查询缓存 &ndash;&gt;
+        <property name="hibernate.cache.use_structured_entries">true</property>&lt;!&ndash; 结构化存储 &ndash;&gt;
+        <property name="hibernate.cache.region_prefix">hibernate</property>&lt;!&ndash; 二级缓存前缀名称&ndash;&gt;
+        &lt;!&ndash;<prop name="hibernate.cache.provider_class">org.hibernate.cache.spi.RegionFactory</prop>&ndash;&gt;
+        <property name="hibernate.cache.region.factory_class">org.hibernate.cache.redis.hibernate52.SingletonRedisRegionFactory</property>
+        <property name="hibernate.cache.provider_configuration_file_resource_path">classpath:hibernate-redis.properties</property>-->
         <!--<property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>-->
         
         <!-- 启用getCurrentSession，默认未启用 -->
