@@ -11,7 +11,7 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
-    <context:property-placeholder location="classpath:config.properties" />
+    <context:property-placeholder location="classpath:config.properties,classpath:redis.properties" />
 
     <bean id="mySqlDataSource" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="name" value="mySqlDb" />
@@ -82,5 +82,5 @@
     <!-- 开启对声明式事物的注解支持 -->
     <tx:annotation-driven transaction-manager="transactionManager" />
 
-    <import resource="classpath:config/spring-session.xml" />
+    <import resource="spring-session.xml" />
 </beans>

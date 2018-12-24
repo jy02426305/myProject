@@ -7,10 +7,14 @@ import com.cyx.project.modules.sys.entity.SysUser;
 import com.cyx.project.modules.sys.service.EmployeesService;
 import com.cyx.project.modules.sys.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 
 
@@ -23,13 +27,19 @@ public class SysUserController {
     @Autowired
     private EmployeesService employeesService;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
 //    @Autowired
 //    private BaseService<SysUser,Integer> sysUserService;
 
     @RequestMapping(value = "/list")
-    public ModelAndView list(){
+    public ModelAndView list(HttpServletRequest request, HttpServletResponse response){
         ModelAndView view=new ModelAndView("admin/sysUser/list.jsp");
         try{
+            request.getSession().setAttribute("username","zhangsan");
+//            redisTemplate.opsForValue().set("wechat","caiyuanxing");
+//            System.out.println(redisTemplate.opsForValue().get("wechat"));
 //            List<SysUser> list= sysUserService.sqlQueryList("select * from sys_user where id>?",new Object[]{1});
 //            view.addObject("list",list);
 //            int total=sysUserService.sqlQueryCount("select count(1) from (select * from sys_user where id>?) t",new Object[]{1});
