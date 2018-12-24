@@ -3,11 +3,12 @@ package com.cyx.project.modules.sys.entity;
 import sun.awt.SunHints;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "sys_user_role")
-public class SysUserRole {
+public class SysUserRole implements Serializable {
     private int id;
     private SysUser sysUser;
     private SysRole sysRole;

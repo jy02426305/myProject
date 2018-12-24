@@ -1,12 +1,13 @@
 package com.cyx.project.modules.sys.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "sys_role")
-public class SysRole {
+public class SysRole implements Serializable {
     private int id;
     private String name;
     private String describe;
