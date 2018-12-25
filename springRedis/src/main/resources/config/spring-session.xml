@@ -121,19 +121,19 @@
         &lt;!&ndash;<property name="enableTransactionSupport" value="true"></property>&ndash;&gt;
     </bean>-->
 
-    <!--<bean id="redisCachePrefix" class="org.springframework.data.redis.cache.DefaultRedisCachePrefix">
+    <bean id="redisCachePrefix" class="org.springframework.data.redis.cache.DefaultRedisCachePrefix">
         <constructor-arg name="delimiter" value="practice" />
-    </bean>-->
+    </bean>
 
-    <!--<bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+    <bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
         <constructor-arg name="redisOperations" ref="redisTemplate"/>
-        &lt;!&ndash; 过期时间 &ndash;&gt;
+        <!-- 过期时间 -->
         <property name="defaultExpiration" value="300000"/>
-        &lt;!&ndash;    支持事务 &ndash;&gt;
-        &lt;!&ndash;<property name="transactionAware" value="true"/>&ndash;&gt;
+        <!--    支持事务 -->
+        <!--<property name="transactionAware" value="true"/>-->
         <property name="usePrefix" value="true"/>
         <property name="cachePrefix" ref="redisCachePrefix"/>
-    </bean>-->
+    </bean>
 
     <!-- redis操作 -->
     <!--<bean id="redisManager" class="com.cyx.project.common.session.RedisManager">
@@ -141,27 +141,27 @@
     </bean>-->
 
     <!-- Session ID 生成器 -->
-    <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"></bean>
-    <!-- SessionDao实现类 -->
+    <!--<bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"></bean>
+    &lt;!&ndash; SessionDao实现类 &ndash;&gt;
     <bean id="sessionDAO" class="com.cyx.project.common.session.MySessionDao">
         <property name="sessionIdGenerator" ref="sessionIdGenerator"></property>
     </bean>
 
-    <!-- sessionIdCookie的实现,用于重写覆盖容器默认的JSESSIONID -->
+    &lt;!&ndash; sessionIdCookie的实现,用于重写覆盖容器默认的JSESSIONID &ndash;&gt;
     <bean id="sharesession" class="org.apache.shiro.web.servlet.SimpleCookie">
-        <!-- cookie的name,对应的默认是 JSESSIONID -->
+        &lt;!&ndash; cookie的name,对应的默认是 JSESSIONID &ndash;&gt;
         <constructor-arg name="name" value="SHAREJSESSIONID" />
-        <!-- jsessionId的path为 / 用于多个系统共享jsessionId -->
+        &lt;!&ndash; jsessionId的path为 / 用于多个系统共享jsessionId &ndash;&gt;
         <property name="path" value="/" />
         <property name="httpOnly" value="true"/>
     </bean>
 
-    <!-- session管理 -->
+    &lt;!&ndash; session管理 &ndash;&gt;
     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
         <property name="globalSessionTimeout" value="1800000"></property>
         <property name="deleteInvalidSessions" value="true"></property>
         <property name="sessionDAO" ref="sessionDAO"></property>
-        <!-- sessionIdCookie的实现,用于重写覆盖容器默认的JSESSIONID -->
+        &lt;!&ndash; sessionIdCookie的实现,用于重写覆盖容器默认的JSESSIONID &ndash;&gt;
         <property name="sessionIdCookie" ref="sharesession" />
     </bean>
 
@@ -170,23 +170,23 @@
         <property name="cacheManager" ref="" />
     </bean>
 
-    <!-- shiro filter -->
+    &lt;!&ndash; shiro filter &ndash;&gt;
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
 
-        <!--
+        &lt;!&ndash;
         <property name="loginUrl" value="/login.jsp"/>
         <property name="successUrl" value="/home.jsp"/>
         <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
-        -->
-        <!-- The 'filters' property is not necessary since any declared javax.servlet.Filter bean  -->
-        <!-- defined will be automatically acquired and available via its beanName in chain        -->
-        <!-- definitions, but you can perform instance overrides or name aliases here if you like: -->
-        <!-- <property name="filters">
+        &ndash;&gt;
+        &lt;!&ndash; The 'filters' property is not necessary since any declared javax.servlet.Filter bean  &ndash;&gt;
+        &lt;!&ndash; defined will be automatically acquired and available via its beanName in chain        &ndash;&gt;
+        &lt;!&ndash; definitions, but you can perform instance overrides or name aliases here if you like: &ndash;&gt;
+        &lt;!&ndash; <property name="filters">
             <util:map>
                 <entry key="anAlias" value-ref="someFilter"/>
             </util:map>
-        </property> -->
-    </bean>
+        </property> &ndash;&gt;
+    </bean>-->
 
 </beans>

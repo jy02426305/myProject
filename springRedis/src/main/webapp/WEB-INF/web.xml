@@ -6,11 +6,11 @@
     <display-name>Archetype Created Web Application</display-name>
 
     <filter>
-        <filter-name>shiroFilter</filter-name>
+        <filter-name>springSessionRepositoryFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>shiroFilter</filter-name>
+        <filter-name>springSessionRepositoryFilter</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <!--<dispatcher>ERROR</dispatcher>-->
