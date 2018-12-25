@@ -94,6 +94,7 @@
         <value>小车</value>
         <value>积木</value>
     </util:list>
+
     <bean id="practice7ServiceImpl" class="com.cyx.spring.zhujie.service.impl.Practice7ServiceImpl">
         <property name="toy" ref="toyPublic"></property>
     </bean>
