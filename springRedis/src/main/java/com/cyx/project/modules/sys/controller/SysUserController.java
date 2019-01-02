@@ -39,8 +39,8 @@ public class SysUserController {
     public ModelAndView list(HttpServletRequest request, HttpServletResponse response){
         ModelAndView view=new ModelAndView("admin/sysUser/list.jsp");
         try{
-            jedisUtil.set("car","banz");
-//            redisTemplate.opsForValue().set("wechat","caiyuanxing");
+            request.getSession().setAttribute("myName","caiyuanxing");
+//            jedisUtil.set("car","banz");
 //            System.out.println(redisTemplate.opsForValue().get("wechat"));
 //            List<SysUser> list= sysUserService.sqlQueryList("select * from sys_user where id>?",new Object[]{1});
 //            view.addObject("list",list);

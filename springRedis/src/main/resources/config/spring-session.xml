@@ -3,18 +3,25 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:cache="http://www.springframework.org/schema/cache"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/util
-       http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+       http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <!-- 不使用就需要注解掉，如果配置了启用注解注释，就必须要配置cacheManager 否则就会启动报错。因为配置了这个缓存拦截器就会去注入cacheManager -->
+    <cache:annotation-driven cache-manager="redisCacheManager" proxy-target-class="true" />
 
     <!--springSession 配置-->
     <bean id="sessionConfiguration"
           class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
         <!--修改session的有效时间-->
-        <property name="maxInactiveIntervalInSeconds" value="1800"></property>
+        <property name="maxInactiveIntervalInSeconds" value="120"></property>
+        <property name="redisNamespace" value="redisPractice" />
     </bean>
 
     <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
@@ -108,7 +115,7 @@
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
         <property name="connectionFactory" ref="jedisClusterConnectionFactory"/>
         <!-- 开启事务 -->
-        <!--<property name="enableTransactionSupport" value="true"></property>-->
+        <property name="enableTransactionSupport" value="true"></property>
         <property name="keySerializer" ref="keySerializer"/>
         <property name="valueSerializer" ref="valueSerializer"/>
         <property name="hashKeySerializer" ref="keySerializer"/>
@@ -122,17 +129,17 @@
     </bean>-->
 
     <bean id="redisCachePrefix" class="org.springframework.data.redis.cache.DefaultRedisCachePrefix">
-        <constructor-arg name="delimiter" value="practice" />
+        <constructor-arg name="delimiter" value="ideatc" />
     </bean>
 
     <bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
         <constructor-arg name="redisOperations" ref="redisTemplate"/>
         <!-- 过期时间 -->
-        <property name="defaultExpiration" value="300000"/>
+        <property name="defaultExpiration" value="60000" />
         <!--    支持事务 -->
-        <!--<property name="transactionAware" value="true"/>-->
-        <property name="usePrefix" value="true"/>
-        <property name="cachePrefix" ref="redisCachePrefix"/>
+        <property name="transactionAware" value="true"/>
+        <property name="usePrefix" value="true" />
+        <property name="cachePrefix" ref="redisCachePrefix" />
     </bean>
 
     <!-- redis操作 -->
