@@ -12,7 +12,9 @@ import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import sun.misc.Request;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -67,5 +69,20 @@ public class SysUserController {
             System.out.println(ex);
         }
         return view;
+    }
+
+    @RequestMapping(value="/testMethod1",produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String testMethod1(HttpServletRequest request){
+        request.getSession().setAttribute("tesetMethod1","hello，我是测试方法1");
+
+        return "哈";
+    }
+
+    @RequestMapping(value="/testMethod2",produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String testMethod2(){
+        jedisUtil.set("testMethod2","你好，我是测试方法2");
+        return "亨";
     }
 }
