@@ -114,8 +114,8 @@
     <!-- 缓存 -->
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
         <property name="connectionFactory" ref="jedisClusterConnectionFactory"/>
-        <!-- 开启事务 -->
-        <property name="enableTransactionSupport" value="true"></property>
+        <!-- 开启事务，集群模式不支持事务 -->
+        <property name="enableTransactionSupport" value="false"></property>
         <property name="keySerializer" ref="keySerializer"/>
         <property name="valueSerializer" ref="valueSerializer"/>
         <property name="hashKeySerializer" ref="keySerializer"/>
@@ -135,11 +135,11 @@
     <bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
         <constructor-arg name="redisOperations" ref="redisTemplate"/>
         <!-- 过期时间 -->
-        <property name="defaultExpiration" value="60000" />
+        <property name="defaultExpiration" value="3600" />
         <!--    支持事务 -->
-        <property name="transactionAware" value="true"/>
+        <property name="transactionAware" value="false"/>
         <property name="usePrefix" value="true" />
-        <property name="cachePrefix" ref="redisCachePrefix" />
+        <!--<property name="cachePrefix" ref="redisCachePrefix" />-->
     </bean>
 
     <!-- redis操作 -->

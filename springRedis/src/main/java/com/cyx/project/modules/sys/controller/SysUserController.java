@@ -70,19 +70,4 @@ public class SysUserController {
         }
         return view;
     }
-
-    @RequestMapping(value="/testMethod1",produces="text/html;charset=UTF-8")
-    @ResponseBody
-    public String testMethod1(HttpServletRequest request){
-        request.getSession().setAttribute("tesetMethod1","hello，我是测试方法1");
-
-        return "哈";
-    }
-
-    @RequestMapping(value="/testMethod2",produces="text/html;charset=UTF-8")
-    @ResponseBody
-    public String testMethod2(){
-        jedisUtil.set("testMethod2","你好，我是测试方法2");
-        return "亨";
-    }
 }
