@@ -16,6 +16,7 @@
         <option value="$PROJECT_DIR$/springWeb/pom.xml" />
         <option value="$PROJECT_DIR$/springMvc/pom.xml" />
         <option value="$PROJECT_DIR$/springRedis/pom.xml" />
+        <option value="$PROJECT_DIR$/shiro/pom.xml" />
       </list>
     </option>
   </component>

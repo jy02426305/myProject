@@ -9,6 +9,7 @@
         <module name="annotationPratice" />
         <module name="basicsPractice" />
         <module name="gcPractice" />
+        <module name="shiro" />
         <module name="springHibernate" />
         <module name="springMvc" />
         <module name="springPractice" />
@@ -20,6 +21,7 @@
       <module name="annotationPratice" target="1.8" />
       <module name="basicsPractice" target="1.8" />
       <module name="gcPractice" target="1.5" />
+      <module name="shiro" target="1.7" />
       <module name="springHibernate" target="1.8" />
       <module name="springMvc" target="1.7" />
       <module name="springPractice" target="1.8" />
@@ -29,5 +31,16 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_STRING" value="-encoding utf-8" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="annotationPratice" options="" />
+      <module name="basicsPractice" options="" />
+      <module name="gcPractice" options="" />
+      <module name="shiro" options="" />
+      <module name="springHibernate" options="" />
+      <module name="springMvc" options="" />
+      <module name="springPractice" options="" />
+      <module name="springRedis" options="" />
+      <module name="springWeb" options="" />
+    </option>
   </component>
 </project>
