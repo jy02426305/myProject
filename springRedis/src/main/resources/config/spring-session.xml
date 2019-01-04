@@ -16,7 +16,7 @@
     <!-- 不使用就需要注解掉，如果配置了启用注解注释，就必须要配置cacheManager 否则就会启动报错。因为配置了这个缓存拦截器就会去注入cacheManager -->
     <cache:annotation-driven cache-manager="redisCacheManager" proxy-target-class="true" />
 
-    <!--springSession 配置-->
+    <!--springSession 配置（依赖spring-session）-->
     <bean id="sessionConfiguration"
           class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
         <!--修改session的有效时间-->
@@ -24,7 +24,7 @@
         <property name="redisNamespace" value="redisPractice" />
     </bean>
 
-    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <!-- 最小空闲数 -->
         <property name="minIdle" value="${redis.minIdle}"/>
         <!-- 最大空闲数 -->
@@ -41,44 +41,9 @@
         <!-- whenExhaustedAction:当“连接池”中active数量达到阀值时，即“链接”资源耗尽时，连接池需要采取的手段, 默认为1(0:抛出异常。1:阻塞，直到有可用链接资源。2:强制创建新的链接资源) -->
     </bean>
 
-    <!--<bean id="clusterRedisNodes1" class="org.springframework.data.redis.connection.RedisNode">
-        <constructor-arg value="127.0.0.1" />
-        <constructor-arg value="7000" type="int" />
-    </bean>
-    <bean id="clusterRedisNodes2" class="org.springframework.data.redis.connection.RedisNode">
-        <constructor-arg value="127.0.0.1" />
-        <constructor-arg value="7001" type="int" />
-    </bean>
-    <bean id="clusterRedisNodes3" class="org.springframework.data.redis.connection.RedisNode">
-        <constructor-arg value="127.0.0.1" />
-        <constructor-arg value="7002" type="int" />
-    </bean>
-    <bean id="clusterRedisNodes4" class="org.springframework.data.redis.connection.RedisNode">
-        <constructor-arg value="127.0.0.1" />
-        <constructor-arg value="7003" type="int" />
-    </bean>
-    <bean id="clusterRedisNodes5" class="org.springframework.data.redis.connection.RedisNode">
-        <constructor-arg value="127.0.0.1" />
-        <constructor-arg value="7004" type="int" />
-    </bean>
-    <bean id="clusterRedisNodes6" class="org.springframework.data.redis.connection.RedisNode">
-        <constructor-arg value="127.0.0.1" />
-        <constructor-arg value="7005" type="int" />
-    </bean>-->
-
     <bean id="redisClusterConfiguration"
           class="org.springframework.data.redis.connection.RedisClusterConfiguration">
-        <!--<property name="clusterNodes">-->
-        <!--<set>-->
-        <!--<ref bean="clusterRedisNodes1" />-->
-        <!--<ref bean="clusterRedisNodes2" />-->
-        <!--<ref bean="clusterRedisNodes3" />-->
-        <!--<ref bean="clusterRedisNodes4" />-->
-        <!--<ref bean="clusterRedisNodes5" />-->
-        <!--<ref bean="clusterRedisNodes6" />-->
-        <!--</set>-->
-        <!--</property>-->
-        <constructor-arg>
+        <constructor-arg name="clusterNodes">
             <list>
                 <value>${redis.cluster1}</value>
                 <value>${redis.cluster2}</value>
@@ -90,13 +55,13 @@
         </constructor-arg>
     </bean>
 
-    <bean id="jedisClusterConnectionFactory"
-          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
-        <constructor-arg name="clusterConfig" ref="redisClusterConfiguration"/>
-        <constructor-arg name="poolConfig" ref="poolConfig"/>
-        <property name="usePool" value="true"/>
+    <!--集群模式-->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <constructor-arg name="clusterConfig" ref="redisClusterConfiguration" />
+        <constructor-arg name="poolConfig" ref="jedisPoolConfig" />
     </bean>
 
+    <!--单机模式-->
     <!--<bean id="jedisAloneConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
         <constructor-arg name="poolConfig" ref="poolConfig" />
         <property name="hostName" value="{redis.host}" />
@@ -113,7 +78,7 @@
 
     <!-- 缓存 -->
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
-        <property name="connectionFactory" ref="jedisClusterConnectionFactory"/>
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
         <!-- 开启事务，集群模式不支持事务 -->
         <property name="enableTransactionSupport" value="false"></property>
         <property name="keySerializer" ref="keySerializer"/>
@@ -128,17 +93,18 @@
         &lt;!&ndash;<property name="enableTransactionSupport" value="true"></property>&ndash;&gt;
     </bean>-->
 
-    <bean id="redisCachePrefix" class="org.springframework.data.redis.cache.DefaultRedisCachePrefix">
-        <constructor-arg name="delimiter" value="ideatc" />
-    </bean>
+    <!--<bean id="redisCachePrefix" class="org.springframework.data.redis.cache.DefaultRedisCachePrefix">
+        <constructor-arg name="delimiter" value=":ideatc:" />
+    </bean>-->
 
     <bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
         <constructor-arg name="redisOperations" ref="redisTemplate"/>
         <!-- 过期时间 -->
         <property name="defaultExpiration" value="3600" />
-        <!--    支持事务 -->
+        <!--    支持事务，集群模式不支持事务 -->
         <property name="transactionAware" value="false"/>
         <property name="usePrefix" value="true" />
+        <!--默认是冒号:-->
         <!--<property name="cachePrefix" ref="redisCachePrefix" />-->
     </bean>
 
