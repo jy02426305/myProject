@@ -10,10 +10,10 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 
-public class CustomPasswordRealms extends AuthorizingRealm {
+public class CustomPermissionRealms extends AuthorizingRealm {
     @Override
     public String getName() {
-        return "MyPasswordRealms";
+        return "MyRealms";
     }
 
     @Override
@@ -24,7 +24,7 @@ public class CustomPasswordRealms extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String username=(String) authenticationToken.getPrincipal();
-//        String password=String.valueOf((char[])authenticationToken.getCredentials());
+        String password=String.valueOf((char[])authenticationToken.getCredentials());
         if (!username.equals("zhangsan")) {
             return null;
         }

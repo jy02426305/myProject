@@ -4,8 +4,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.config.IniSecurityManagerFactory;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -116,7 +118,9 @@ public class AppTest
         if (!currentUser.isAuthenticated()) {
             //5.登录
             try {
-                AuthenticationToken token=new UsernamePasswordToken("zhangsan","666");
+                String username="zhangsan";
+                Md5Hash md5Hash=new Md5Hash("666",username,3);
+                AuthenticationToken token=new UsernamePasswordToken(username,md5Hash.toString());
                 currentUser.login(token);
                 System.out.println("登录成功");
             }catch (UnknownAccountException uae){
@@ -181,6 +185,29 @@ public class AppTest
                     System.out.println("我没有role1或role2角色");
                 }
 
+                if (currentUser.isPermitted("user:delete")) {
+                    System.out.println(" 我有delete权限");
+                }else{
+                    System.out.println("我没有delete权限");
+                }
+
+                System.out.println("我delete和read权限情况：" + Arrays.toString(currentUser.isPermitted("user:delete","user:read")));
+
+                System.out.println("我是否有create和 read权限" + currentUser.isPermittedAll("user:create", "user:read"));
+
+                try{
+                    currentUser.checkPermission("user:create");
+                    System.out.println("我有create权限");
+                }catch (AuthorizationException e){
+                    System.out.println("我没有create权限");
+                }
+
+                try{
+                    currentUser.checkPermission("user:read");
+                    System.out.println("我有read权限");
+                }catch (AuthorizationException e){
+                    System.out.println("我没有read权限");
+                }
 
             }catch (UnknownAccountException uae){
                 System.out.println("用户不存在");
