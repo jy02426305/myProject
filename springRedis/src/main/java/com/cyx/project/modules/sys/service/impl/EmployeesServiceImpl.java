@@ -1,5 +1,6 @@
 package com.cyx.project.modules.sys.service.impl;
 
+import com.cyx.project.common.base.dto.Page;
 import com.cyx.project.modules.sys.dao.EmployeesDao;
 import com.cyx.project.modules.sys.entity.Employees;
 import com.cyx.project.modules.sys.service.EmployeesService;
@@ -19,5 +20,10 @@ public class EmployeesServiceImpl implements EmployeesService {
     @Override
     public Employees getEntity(int id) {
         return employeesDao.getEntity(id);
+    }
+
+    @Override
+    public Page<Employees> getPage() {
+        return employeesDao.hqlQueryPage(1,10,"empNo>?0",new Object[]{10011});
     }
 }

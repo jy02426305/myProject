@@ -12,10 +12,7 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.math.BigInteger;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
     private final static int BATCH_SIZE = 50;
@@ -319,6 +316,8 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
         return page;
     }
 
+
+
     /**
      * 判断能否分页查询 ，页码从1开始
      * @param pageIndex
@@ -331,5 +330,89 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
             return false;
         }
         return true;
+    }
+
+    /****************************** HQL ******************************/
+    @Override
+    public Page<T> hqlQueryPage() {
+        return hqlQueryPage(-1, -1, null, null, null);
+    }
+
+    @Override
+    public Page<T> hqlQueryPage(int firstResult, int maxResult) {
+        return hqlQueryPage(firstResult, maxResult, null, null, null);
+    }
+
+    @Override
+    public Page<T> hqlQueryPage(int firstResult, int maxResult,
+                                        LinkedHashMap<String, String> orderby) {
+        return hqlQueryPage(firstResult, maxResult, null, null, orderby);
+    }
+
+    @Override
+    public Page<T> hqlQueryPage(int firstResult, int maxResult,
+                                        String where, Object[] params) {
+        return hqlQueryPage(firstResult, maxResult, where, params, null);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Page<T> hqlQueryPage(int firstResult, int maxResult,
+                                        String where, Object[] params, LinkedHashMap<String, String> orderby) {
+        String entityName = clazz.getSimpleName();
+        String whereql = where != null && !"".equals(where.trim()) ? " where "
+                + where : "";
+        Session session = getSession();
+        Query query = session.createQuery("select o from " + entityName + " o"
+                + whereql + buildOrderby(orderby));
+        if (firstResult != -1 && maxResult != -1)
+            query.setFirstResult(firstResult).setMaxResults(maxResult);
+        setQueryParameter(query, params);
+
+        Page<T> qr = new Page<T>();
+        // qr.setResultlist(query.getResultList());
+        Query queryCount = session.createQuery("select count(1) from "
+                + entityName + " o" + whereql);
+        setQueryParameter(queryCount, params);
+        Long count = (Long) queryCount.uniqueResult();
+        qr.setCount(count.intValue());
+        qr.setData(query.list());
+        return qr;
+    }
+
+    /**
+     * 设置查询参数
+     *
+     * @param query
+     *            查询对象
+     * @param params
+     *            参数值
+     */
+    public void setQueryParameter(Query query, Object[] params) {
+        if (params != null) {
+            for (int i = 0; i < params.length; i++) {
+                query.setParameter(i, params[i]);
+            }
+        }
+    }
+
+    /**
+     * 构建排序语句
+     *
+     * @param orderby
+     *            排序属性与asc/desc, Key为属性,Value为asc/desc
+     * @return
+     */
+    public String buildOrderby(LinkedHashMap<String, String> orderby) {
+        StringBuilder sb = new StringBuilder();
+        if (orderby != null && !orderby.isEmpty()) {
+            sb.append(" order by ");
+            for (Map.Entry<String, String> entry : orderby.entrySet()) {
+                sb.append("o.").append(entry.getKey()).append(" ")
+                        .append(entry.getValue()).append(',');
+            }
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        return sb.toString();
     }
 }

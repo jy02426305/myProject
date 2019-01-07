@@ -51,6 +51,10 @@ public class AppTest
                 if (currentUser.hasRole("role1")) {
                     System.out.println("当前用户角色role1");
                 }
+                currentUser.logout();
+                if(!currentUser.isAuthenticated()){
+                    System.out.println("用户登出");
+                }
             }catch (UnknownAccountException uae){
                 System.out.println("用户不存在");
             }catch (IncorrectCredentialsException ice){
