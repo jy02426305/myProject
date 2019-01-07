@@ -5,10 +5,14 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomPermissionRealms extends AuthorizingRealm {
     @Override
@@ -16,9 +20,28 @@ public class CustomPermissionRealms extends AuthorizingRealm {
         return "MyRealms";
     }
 
+    /**
+     *
+     * @param principalCollection 用户认证凭证信息：SimpleAuthenticationInfo：认证方法返回封装认证信息中第一个参数：用户信息（username/user）
+     * @return
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+        //当前登录用户信息：用户凭证
+        String username=(String) principalCollection.getPrimaryPrincipal();
+
+        //模拟查询数据库：查询用户事先指定的角色，以及用户权限
+        List<String> roles=new ArrayList<>();//角色集合
+        List<String> permission=new ArrayList<>();//权限集合
+        //假设用户在数据库中有role1角色
+        roles.add("role2");
+        //假设角色拥有user:create权限
+        permission.add("user:create");
+
+        SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
+        info.addRoles(roles);
+        info.addStringPermissions(permission);
+        return info;
     }
 
     @Override

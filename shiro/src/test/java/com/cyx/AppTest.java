@@ -119,8 +119,8 @@ public class AppTest
             //5.登录
             try {
                 String username="zhangsan";
-                Md5Hash md5Hash=new Md5Hash("666",username,3);
-                AuthenticationToken token=new UsernamePasswordToken(username,md5Hash.toString());
+                String password="666";//会根据shiro-cryptography.ini中定义的加密算法生成新的字符串再去比对
+                AuthenticationToken token=new UsernamePasswordToken(username,password);
                 currentUser.login(token);
                 System.out.println("登录成功");
             }catch (UnknownAccountException uae){
