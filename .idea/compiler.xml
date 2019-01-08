@@ -33,5 +33,17 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_STRING" value="-encoding utf-8" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="annotationPratice" options="" />
+      <module name="basicsPractice" options="" />
+      <module name="gcPractice" options="" />
+      <module name="shiro" options="" />
+      <module name="shiroWeb" options="" />
+      <module name="springHibernate" options="" />
+      <module name="springMvc" options="" />
+      <module name="springPractice" options="" />
+      <module name="springRedis" options="" />
+      <module name="springWeb" options="" />
+    </option>
   </component>
 </project>
