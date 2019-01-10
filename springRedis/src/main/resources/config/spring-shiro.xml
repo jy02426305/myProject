@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--配置自定义realm-->
+    <bean id="myAuthorizingRealm" class="com.cyx.project.common.shiro.realm.MyAuthorizingRealm"></bean>
+
+    <!--配置安全管理器SecurityManager-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="myAuthorizingRealm" />
+    </bean>
+
+    <!--定义ShiroFilter-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager" />
+        <property name="loginUrl" value="/login" />
+        <property name="unauthorizedUrl" value="/noPermission" />
+        <property name="filterChainDefinitions">
+            <value>
+                <!--静态资源可以匿名访问-->
+                /static/**=anon
+                <!--当请求logout，会被logout捕获并清除session-->
+                /logout=logout
+                <!--所有的请求都需要身份认证-->
+                /**=authc
+            </value>
+        </property>
+    </bean>
+</beans>
