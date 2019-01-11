@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.AbstractMap;
+import java.util.Map;
+
 @Controller
 @RequestMapping(value = "/employees")
 public class EmployeesController {
@@ -32,6 +35,23 @@ public class EmployeesController {
     public String testMethod2() {
         Page<Employees> page=employeesService.getPage();
         System.out.println(page.getCount());
+        return "咩";
+    }
+
+    @RequestMapping(value = "testMethod3", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String testMethod3() {
+        Map.Entry<String,Object> entry=new AbstractMap.SimpleEntry<>("empNo",1004);
+        boolean exisis=employeesService.exists(entry);
+        System.out.println(exisis?"记录已存在":"记录不存在");
+        return "咩";
+    }
+
+    @RequestMapping(value = "testMethod4", produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public String testMethod4() {
+        Employees employees=employeesService.getByEmpNo(10008);
+        System.out.println(employees.getFirstName());
         return "咩";
     }
 }

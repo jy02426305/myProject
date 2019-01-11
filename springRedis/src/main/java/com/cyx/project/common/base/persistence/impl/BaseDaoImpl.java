@@ -80,6 +80,24 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
         getSession().saveOrUpdate(entity);
     }
 
+    @Override
+    public T getByColumn(Map.Entry<String,Object> param){
+        String hql="select o from "+clazz.getSimpleName()+" o where "+param.getKey()+"=?0";
+        Query query=getSession().createQuery(hql);
+        query.setParameter(0,param.getValue());
+        T entity=(T)query.uniqueResult();
+        return entity;
+    }
+
+    @Override
+    public boolean exists(Map.Entry<String,Object> param){
+        Query queryCount = getSession().createQuery("select count(1) from "
+                + clazz.getSimpleName() + " o" + " where "+param.getKey()+"=?0");
+        queryCount.setParameter(0,param.getValue());
+        Long count = (Long) queryCount.uniqueResult();
+        return count>0?true:false;
+    }
+
     /**
      * 批量添加
      * @param entityList
@@ -356,7 +374,7 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("all")
     public Page<T> hqlQueryPage(int firstResult, int maxResult,
                                         String where, Object[] params, LinkedHashMap<String, String> orderby) {
         String entityName = clazz.getSimpleName();

@@ -1,18 +1,11 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2019/1/10 0010
-  Time: 23:23
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>登录</title>
-    <link href="static/plugin/layui/css/layui.css" rel="stylesheet"/>
-    <link href="static/css/admin.css" rel="stylesheet"/>
-    <link href="static/css/login.css" rel="stylesheet"/>
+    <link href="static/plugin/layuiadmin/layui/css/layui.css" rel="stylesheet"/>
+    <link href="static/plugin/layuiadmin/style/admin.css" rel="stylesheet"/>
+    <link href="static/plugin/layuiadmin/style/login.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
@@ -61,12 +54,12 @@
     </div>
 
     <div class="layui-trans layadmin-user-login-footer">
-        <p>© 2019 <a href="/">未名</a></p>
+        <p>© 2019 <a href="/">-</a></p>
     </div>
 </div>
 
+<script type="text/javascript" src="static/plugin/layuiadmin/layui/layui.js"></script>
 <script type="text/javascript" src="static/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="static/plugin/layui/layui.js"></script>
 <script type="text/javascript" src="static/js/login.js"></script>
 
 </body>

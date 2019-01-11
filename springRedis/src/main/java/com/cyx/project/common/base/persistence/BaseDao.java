@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface BaseDao<T,PK extends Serializable> {
     Session getSession();
@@ -26,6 +27,10 @@ public interface BaseDao<T,PK extends Serializable> {
     void update(T entity);
 
     void saveOrUpdate(T entity);
+
+    T getByColumn(Map.Entry<String,Object> param);
+
+    boolean exists(Map.Entry<String,Object> param);
 
     /**
      * 批量添加
@@ -118,14 +123,14 @@ public interface BaseDao<T,PK extends Serializable> {
      * 分页获取所有记录
      * @return
      */
-    public Page<T> hqlQueryPage();
+    Page<T> hqlQueryPage();
     /**
      * 分页获取记录
      * @param firstResult 开始索引,如果输入值为-1,即获取全部数据
      * @param maxResult 每页获取的记录数,如果输入值为-1,即获取全部数据
      * @return
      */
-    public Page<T> hqlQueryPage(int firstResult, int maxResult);
+    Page<T> hqlQueryPage(int firstResult, int maxResult);
     /**
      * 分页获取记录
      * @param firstResult 开始索引,如果输入值为-1,即获取全部数据
@@ -136,7 +141,7 @@ public interface BaseDao<T,PK extends Serializable> {
     orderby.put("password", "desc");
      * @return
      */
-    public Page<T> hqlQueryPage(int firstResult, int maxResult, LinkedHashMap<String, String> orderby);
+    Page<T> hqlQueryPage(int firstResult, int maxResult, LinkedHashMap<String, String> orderby);
     /**
      * 分页获取记录
      * @param firstResult 开始索引,如果输入值为-1,即获取全部数据
@@ -145,7 +150,7 @@ public interface BaseDao<T,PK extends Serializable> {
      * @param params 条件语句出现的位置参数值
      * @return
      */
-    public Page<T> hqlQueryPage(int firstResult, int maxResult, String where, Object[] params);
+    Page<T> hqlQueryPage(int firstResult, int maxResult, String where, Object[] params);
     /**
      * 分页获取记录
      * @param firstResult 开始索引,如果输入值为-1,即获取全部数据
@@ -158,5 +163,5 @@ public interface BaseDao<T,PK extends Serializable> {
     orderby.put("password", "desc");
      * @return
      */
-    public Page<T> hqlQueryPage(int firstResult, int maxResult, String where, Object[] params, LinkedHashMap<String, String> orderby);
+    Page<T> hqlQueryPage(int firstResult, int maxResult, String where, Object[] params, LinkedHashMap<String, String> orderby);
 }

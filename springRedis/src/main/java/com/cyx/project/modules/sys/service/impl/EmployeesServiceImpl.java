@@ -7,6 +7,9 @@ import com.cyx.project.modules.sys.service.EmployeesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.AbstractMap;
+import java.util.Map;
+
 @Service(value = "employeesService")
 public class EmployeesServiceImpl implements EmployeesService {
     @Autowired
@@ -25,5 +28,16 @@ public class EmployeesServiceImpl implements EmployeesService {
     @Override
     public Page<Employees> getPage() {
         return employeesDao.hqlQueryPage(1,10,"empNo>?0",new Object[]{10011});
+    }
+
+    @Override
+    public boolean exists(Map.Entry<String, Object> param) {
+        return employeesDao.exists(param);
+    }
+
+    @Override
+    public Employees getByEmpNo(int empNo) {
+        Map.Entry<String,Object> entry=new AbstractMap.SimpleEntry<>("empNo",empNo);
+        return employeesDao.getByColumn(entry);
     }
 }

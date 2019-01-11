@@ -55,15 +55,15 @@
         </constructor-arg>
     </bean>
 
-    <!--集群模式-->
+    <!--集群-->
     <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
         <constructor-arg name="clusterConfig" ref="redisClusterConfiguration" />
         <constructor-arg name="poolConfig" ref="jedisPoolConfig" />
     </bean>
 
-    <!--单机模式-->
-    <!--<bean id="jedisAloneConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
-        <constructor-arg name="poolConfig" ref="poolConfig" />
+    <!--本地-->
+    <!--<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <constructor-arg name="poolConfig" ref="jedisPoolConfig" />
         <property name="hostName" value="{redis.host}" />
         <property name="port" value="${redis.port}" />
         <property name="password" value="${redis.password}" />
