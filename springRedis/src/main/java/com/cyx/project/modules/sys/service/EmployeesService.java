@@ -16,4 +16,6 @@ public interface EmployeesService {
     boolean exists(Map.Entry<String,Object> params);
 
     Employees getByEmpNo(int empNo);
+
+    Employees getByFirstName(String fristName);
 }

@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -82,15 +83,22 @@ public class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK> {
 
     @Override
     public T getByColumn(Map.Entry<String,Object> param){
-        String hql="select o from "+clazz.getSimpleName()+" o where "+param.getKey()+"=?0";
+        Assert.notNull(param,"参数不可为空");
+        String hql="select o from "+clazz.getSimpleName()+" o where "+param.getKey()+"=?1";
         Query query=getSession().createQuery(hql);
-        query.setParameter(0,param.getValue());
-        T entity=(T)query.uniqueResult();
+        query.setParameter(1,param.getValue());
+        List<T> list=query.list();
+        if(list==null || list.size()==0){
+            return null;
+        }
+        Assert.isTrue(list.size()==1,"结果不是唯一");
+        T entity=list.get(0);
         return entity;
     }
 
     @Override
     public boolean exists(Map.Entry<String,Object> param){
+        Assert.notNull(param,"参数不可为空");
         Query queryCount = getSession().createQuery("select count(1) from "
                 + clazz.getSimpleName() + " o" + " where "+param.getKey()+"=?0");
         queryCount.setParameter(0,param.getValue());

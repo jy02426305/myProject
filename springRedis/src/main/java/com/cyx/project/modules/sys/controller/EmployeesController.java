@@ -50,8 +50,10 @@ public class EmployeesController {
     @RequestMapping(value = "testMethod4", produces = "text/html;charset=UTF-8")
     @ResponseBody
     public String testMethod4() {
-        Employees employees=employeesService.getByEmpNo(10008);
-        System.out.println(employees.getFirstName());
+        Employees employees=employeesService.getByEmpNo(57492);
+        if(employees!=null){
+            System.out.println(employees.getFirstName());
+        }
         return "咩";
     }
 }

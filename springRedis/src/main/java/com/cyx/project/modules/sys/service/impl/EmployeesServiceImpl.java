@@ -40,4 +40,10 @@ public class EmployeesServiceImpl implements EmployeesService {
         Map.Entry<String,Object> entry=new AbstractMap.SimpleEntry<>("empNo",empNo);
         return employeesDao.getByColumn(entry);
     }
+
+    @Override
+    public Employees getByFirstName(String fristName) {
+        Map.Entry<String,Object> entry=new AbstractMap.SimpleEntry<>("firstName",fristName);
+        return employeesDao.getByColumn(entry);
+    }
 }
