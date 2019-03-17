@@ -44,6 +44,7 @@ public class LoginServlet extends HttpServlet{
                 req.setAttribute("errMsg","未知错误");
             }
         }
+
         //此方法不处理登录成功（认证成功），shiro认证成功会自动跳转到上一个请求路径
         //登录失败还是到login页面
         req.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(req,resp);
