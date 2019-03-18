@@ -60,7 +60,8 @@
 
 <script type="text/javascript" src="static/plugin/layuiadmin/layui/layui.js"></script>
 <script type="text/javascript" src="static/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="static/js/login.js"></script>
+<script type="text/javascript" src="static/js/des.js"></script>
+<script type="text/javascript" src="static/js/login.js?v=1"></script>
 
 </body>
 </html>

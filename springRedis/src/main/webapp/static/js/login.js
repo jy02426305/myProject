@@ -17,8 +17,28 @@ jQuery(document).ready(function () {
             form.render();
 
             //提交
-            form.on('submit(LAY-user-login-submit)', function(obj){
-                window.location.href="./main";
+            form.on('submit(LAY-user-login-submit)', function(data){
+                data.field.username=DesUtils.encode(data.field.username,"service,ideatc,com");
+                data.field.password=DesUtils.encode(data.field.password,"service,ideatc,com");
+                $.ajax({
+                    url: 'http://localhost:8088/login',
+                    type: 'post',
+                    data: data.field,
+                    dataType:"jsonp",
+                    processData:false,
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
+                    headers : {
+                        'Content-Type' : 'application/x-www-form-urlencoded'
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        window.location.href="http://localhost:8088/wp/main";
+                    }
+                });
+                // window.location.href="./main";
                 return;
                 //请求登入接口
                 admin.req({
