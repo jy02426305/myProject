@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <springVersion>5.1.3.RELEASE</springVersion>
+        <springVersion>5.3.18</springVersion>
         <mysqlVersion>8.0.13</mysqlVersion>
     </properties>
 
