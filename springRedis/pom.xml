@@ -23,7 +23,7 @@
         <!--<hibernateVersion>5.2.8.Final</hibernateVersion>-->
         <aspectjVersion>1.9.2</aspectjVersion>
         <mysqlVersion>8.0.13</mysqlVersion>
-        <shiroVersion>1.4.0</shiroVersion>
+        <shiroVersion>1.10.0</shiroVersion>
     </properties>
 
     <dependencies>
